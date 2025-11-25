@@ -97,24 +97,33 @@ document.addEventListener('DOMContentLoaded', () => {
     img.addEventListener('click', () => {
       lightboxImg.src = img.src;
       lightbox.classList.add('active');
+
     });
   });
 
-  // Close Lightbox
-  const closeLightbox = () => {
+  lightboxClose.addEventListener('click', () => {
     lightbox.classList.remove('active');
-  };
-
-  lightboxClose.addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) closeLightbox();
   });
 
-  // Close on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-      closeLightbox();
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      lightbox.classList.remove('active');
     }
   });
 
+  // 6. Robust Map Loading (Hard Reset)
+  const mapIframe = document.getElementById('googleMap');
+  const mapContainer = document.querySelector('.map-container');
+
+  if (mapIframe && mapContainer) {
+    const showMap = () => {
+      mapContainer.classList.add('loaded');
+    };
+
+    // 1. Listen for load event
+    mapIframe.addEventListener('load', showMap);
+
+    // 2. Fallback Timeout (Force show after 2s)
+    setTimeout(showMap, 2000);
+  }
 });

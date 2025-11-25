@@ -304,8 +304,16 @@
   <!-- SECTION 4: LOCATION (Satellite Map Zoom 18) -->
   <section class="section location">
 
-    <div class="map-frame reveal-block">
-      <iframe src="https://maps.google.com/maps?q=Gypsys%20Paradiso%20Vattavada&t=k&z=18&ie=UTF8&iwloc=&output=embed"
+    <!-- Map Container (Direct Child) -->
+    <div class="map-container">
+      <!-- Branded Loader -->
+      <div class="map-loader">
+        <div class="gold-spinner"></div>
+        <p>Locating Sanctuary...</p>
+      </div>
+      <!-- Map Iframe (No Inline Onload) -->
+      <iframe id="googleMap"
+        src="https://maps.google.com/maps?q=Gypsys%20Paradiso%20Vattavada&t=k&z=18&ie=UTF8&iwloc=&output=embed"
         width="100%" height="100%" loading="lazy">
       </iframe>
     </div>
@@ -379,26 +387,49 @@
       </div>
 
       <div class="journey-timeline reveal-up delay-2">
-        <svg class="journey-line" viewBox="0 0 1000 100" preserveAspectRatio="none">
-          <!-- Upward Parabola (1-2), Downward Parabola (2-3), Upward Parabola (3-4) -->
-          <path d="M0,50 Q166,-20 333,50 Q500,120 666,50 Q833,-20 1000,50" class="line-path" id="journeyPath" />
-        </svg>
-        <div class="journey-car">🚙</div>
+        <!-- Step 1 -->
         <div class="timeline-point">
           <div class="timeline-dot">1</div>
           <h3>Munnar</h3>
           <p style="font-size: 0.9rem; color: #888;">Fuel Up</p>
         </div>
+
+        <!-- Arrow 1 -->
+        <div class="journey-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </div>
+
+        <!-- Step 2 -->
         <div class="timeline-point">
           <div class="timeline-dot">2</div>
           <h3>Check Post</h3>
           <p style="font-size: 0.9rem; color: #888;">Before 6 PM</p>
         </div>
+
+        <!-- Arrow 2 -->
+        <div class="journey-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </div>
+
+        <!-- Step 3 -->
         <div class="timeline-point">
           <div class="timeline-dot">3</div>
           <h3>Off-Road</h3>
           <p style="font-size: 0.9rem; color: #888;">Jeep / Auto</p>
         </div>
+
+        <!-- Arrow 3 -->
+        <div class="journey-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </div>
+
+        <!-- Step 4 -->
         <div class="timeline-point">
           <div class="timeline-dot">4</div>
           <h3>Paradiso</h3>
