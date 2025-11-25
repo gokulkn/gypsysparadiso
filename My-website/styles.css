@@ -1004,18 +1004,8 @@ em {
   }
 
   .map-overlay-info {
-    right: 20px;
-    left: auto;
-    transform: none;
-    bottom: auto;
-    top: 20px;
-    /* Move to Top-Right to avoid map controls */
-    width: auto;
-    max-width: 200px;
-    text-align: right;
-    padding: 15px;
     display: none !important;
-    /* Hidden on mobile as requested */
+    /* Ensure it's gone */
   }
 
   .floating-cta {
@@ -1117,14 +1107,18 @@ em {
 .scroll-hint {
   text-align: center;
   color: var(--gold);
-  font-size: 0.9rem;
-  margin-top: -10px;
-  margin-bottom: 20px;
-  opacity: 0.8;
-  animation: fadeOutHint 5s forwards 3s;
-  /* Fade out after 3s delay */
+  font-size: 1.1rem;
+  /* Larger font */
+  font-weight: 500;
+  margin-top: 0px;
+  margin-bottom: 25px;
+  opacity: 1;
+  animation: bounceHint 2s infinite;
+  /* Continuous bounce */
   display: none;
   /* Hidden by default */
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 @media (max-width: 900px) {
@@ -1134,11 +1128,18 @@ em {
   }
 }
 
-@keyframes fadeOutHint {
-  to {
-    opacity: 0;
-    visibility: hidden;
+@keyframes bounceHint {
+
+  0%,
+  100% {
+    transform: translateX(0);
   }
+
+  50% {
+    transform: translateX(10px);
+  }
+
+  /* Side-to-side bounce for "Swipe" */
 }
 
 /* --- VIBRANT ESSENTIALS --- */
@@ -1561,5 +1562,25 @@ em {
 
   100% {
     box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+  }
+}
+
+/* --- FINAL MOBILE OVERRIDES (AGGRESSIVE) --- */
+@media (max-width: 900px) {
+
+  .mobile-float,
+  .floating-cta,
+  .map-overlay-info {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* Ensure Journey Line is Visible and Connected */
+  .journey-line {
+    stroke-width: 4px !important;
+    stroke-dasharray: 8 8 !important;
+    opacity: 1 !important;
   }
 }
