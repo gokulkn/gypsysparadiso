@@ -1014,6 +1014,21 @@ em {
     max-width: 200px;
     text-align: right;
     padding: 15px;
+    display: none !important;
+    /* Hidden on mobile as requested */
+  }
+
+  .floating-cta {
+    display: none !important;
+    /* Hidden on mobile as requested */
+  }
+
+  /* Fix Book Stay Button on Mobile */
+  .hero-cta {
+    max-width: 90%;
+    white-space: normal;
+    font-size: 1rem;
+    padding: 12px 25px;
   }
 
 
@@ -1079,6 +1094,8 @@ em {
     margin-top: 30px;
     scrollbar-width: none;
     /* Hide scrollbar for cleaner look */
+    padding-right: 20px;
+    /* Peek effect */
   }
 
   .bento-grid::-webkit-scrollbar {
@@ -1091,17 +1108,49 @@ em {
     scroll-snap-align: center;
     margin-bottom: 0;
     /* Remove bottom margin in flex */
+    margin-right: 15px;
+    /* Spacing between cards */
+  }
+}
+
+/* Scroll Hint Animation */
+.scroll-hint {
+  text-align: center;
+  color: var(--gold);
+  font-size: 0.9rem;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  opacity: 0.8;
+  animation: fadeOutHint 5s forwards 3s;
+  /* Fade out after 3s delay */
+  display: none;
+  /* Hidden by default */
+}
+
+@media (max-width: 900px) {
+  .scroll-hint {
+    display: block;
+    /* Show only on mobile */
+  }
+}
+
+@keyframes fadeOutHint {
+  to {
+    opacity: 0;
+    visibility: hidden;
   }
 }
 
 /* --- VIBRANT ESSENTIALS --- */
 .faq-section {
   background: var(--ink);
-  /* Cohesive Deep Ink Background */
+  /* Solid dark background */
   position: relative;
   overflow: hidden;
+  padding: 80px 20px;
 }
 
+/* Remove the radial gradient glow if it causes "fade" issues, or keep it very subtle */
 .faq-section::before {
   content: '';
   position: absolute;
@@ -1109,8 +1158,9 @@ em {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 0%, rgba(192, 160, 98, 0.15), transparent 70%);
-  /* Subtle Gold Glow */
+  background: radial-gradient(circle at 50% 0%, rgba(192, 160, 98, 0.05), transparent 70%);
+  /* Very subtle */
+  pointer-events: none;
   z-index: 0;
 }
 
@@ -1293,13 +1343,24 @@ em {
   fill: none;
   stroke: var(--gold);
   stroke-width: 4;
-  stroke-dasharray: 15, 15;
+  stroke-dasharray: 10 10;
+  /* Consistent dotted line */
   stroke-linecap: round;
-  stroke-dashoffset: 1000;
-  transition: stroke-dashoffset 3s ease-in-out;
+  stroke-dashoffset: 0;
+  /* Reset to ensure visibility */
   transition: stroke-dashoffset 3s ease-in-out;
   filter: drop-shadow(0 0 5px rgba(192, 160, 98, 0.5));
   /* Reduced glow for cleaner line */
+}
+
+/* Mobile Journey Line Fix */
+@media (max-width: 900px) {
+  .journey-line {
+    stroke-width: 4px;
+    /* Thicker line for mobile visibility */
+    stroke-dasharray: 8 8;
+    /* Tighter dots */
+  }
 }
 
 .journey-car {
