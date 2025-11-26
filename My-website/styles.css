@@ -1566,6 +1566,12 @@ em {
   padding: 0 10px;
 }
 
+.timeline-point h3 {
+  color: white;
+  /* Visibility Fix */
+  margin-bottom: 5px;
+}
+
 .timeline-dot {
   width: 40px;
   height: 40px;
@@ -1729,9 +1735,8 @@ em {
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* Center items vertically */
-    gap: 15px;
-    /* Reduce gap */
+    gap: 30px;
+    /* Increased from 15px to reduce congestion */
     margin-top: 30px;
     padding-left: 0;
     overflow-x: auto;
