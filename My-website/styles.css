@@ -1100,6 +1100,12 @@ em {
     background: black;
   }
 
+  /* Aggressive Map Frame Removal */
+  .section.location {
+    padding: 0 !important;
+    border: none !important;
+  }
+
   .map-container iframe {
     border: none !important;
     width: 100% !important;
@@ -1698,57 +1704,34 @@ em {
   /* --- SIMPLIFIED ARROW LAYOUT (MOBILE) --- */
   .journey-timeline {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Center everything */
-    gap: 10px;
-    /* Reduced gap significantly */
+    flex-direction: row;
+    /* Horizontal Layout */
+    align-items: flex-start;
+    gap: 30px;
     margin-top: 30px;
     padding-left: 0;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    /* Space for scrollbar/swipe */
   }
 
-  /* Remove old vertical line if present */
-  .journey-timeline::before {
-    display: none;
-  }
-
-  .timeline-point {
-    flex-direction: column;
-    /* Stack dot and text */
-    text-align: center;
-    gap: 10px;
-    width: 100%;
-  }
-
-  .timeline-dot {
-    margin: 0 auto;
-    /* Center dot */
-  }
-
-  .timeline-point div:last-child {
-    align-items: center;
-    /* Center text */
-  }
-
-  /* Rotate Arrow Down */
+  /* Reset Arrow for Horizontal */
   .journey-arrow {
-    transform: rotate(90deg);
-    margin: 10px 0;
-    animation: pulseArrowDown 2s infinite;
+    transform: rotate(0deg);
+    margin: 20px 0;
+    animation: pulseArrowRight 2s infinite;
   }
 
-  @keyframes pulseArrowDown {
+  @keyframes pulseArrowRight {
 
     0%,
     100% {
-      transform: rotate(90deg) translateY(0) scale(1.5);
-      /* Larger arrow */
+      transform: translateX(0);
       opacity: 0.6;
     }
 
     50% {
-      transform: rotate(90deg) translateY(5px) scale(1.5);
-      /* Larger arrow */
+      transform: translateX(5px);
       opacity: 1;
     }
   }
@@ -1806,4 +1789,44 @@ em {
     /* Smaller on mobile to prevent congestion */
     margin-top: 0px;
   }
+}/* --- MOBILE MARQUEE ANIMATION --- */
+@media (max-width: 900px) {
+    .mobile-marquee {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: hidden;
+        /* Hide scrollbar for auto-scroll */
+        gap: 20px;
+        /* Ensure items don't shrink */
+    }
+
+    .mobile-marquee>* {
+        flex-shrink: 0;
+        animation: mobileScroll 20s linear infinite;
+    }
+
+    /* Pause on interaction */
+    .mobile-marquee:hover>*,
+    .mobile-marquee:active>* {
+        animation-play-state: paused;
+    }
+}
+
+@keyframes mobileScroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+        /* Move by 100% of the item width? No, this moves the item itself. */
+        /* This simple animation assumes items are moving relative to their container. 
+       But if we apply it to ALL items, they all move left. 
+       To make a seamless loop, we need the container to scroll or items to translate.
+       Since we cloned items, we have [Item1, Item2, Item1, Item2].
+       We want to move left until the first set is gone, then reset.
+       The distance is -50% of the TOTAL scroll width if we doubled it?
+       Actually, standard marquee moves the track.
+    */
+    }
 }

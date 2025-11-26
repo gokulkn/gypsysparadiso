@@ -1,0 +1,41 @@
+/* --- MOBILE MARQUEE ANIMATION --- */
+@media (max-width: 900px) {
+    .mobile-marquee {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: hidden;
+        /* Hide scrollbar for auto-scroll */
+        gap: 20px;
+        /* Ensure items don't shrink */
+    }
+
+    .mobile-marquee>* {
+        flex-shrink: 0;
+        animation: mobileScroll 20s linear infinite;
+    }
+
+    /* Pause on interaction */
+    .mobile-marquee:hover>*,
+    .mobile-marquee:active>* {
+        animation-play-state: paused;
+    }
+}
+
+@keyframes mobileScroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+        /* Move by 100% of the item width? No, this moves the item itself. */
+        /* This simple animation assumes items are moving relative to their container. 
+       But if we apply it to ALL items, they all move left. 
+       To make a seamless loop, we need the container to scroll or items to translate.
+       Since we cloned items, we have [Item1, Item2, Item1, Item2].
+       We want to move left until the first set is gone, then reset.
+       The distance is -50% of the TOTAL scroll width if we doubled it?
+       Actually, standard marquee moves the track.
+    */
+    }
+}
