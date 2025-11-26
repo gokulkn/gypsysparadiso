@@ -1728,29 +1728,45 @@ em {
   .journey-timeline {
     display: flex;
     flex-direction: row;
-    /* Horizontal Layout */
-    align-items: flex-start;
-    gap: 30px;
+    align-items: center;
+    /* Center items vertically */
+    gap: 15px;
+    /* Reduce gap */
     margin-top: 30px;
     padding-left: 0;
     overflow-x: auto;
     padding-bottom: 20px;
-    /* Space for scrollbar/swipe */
+  }
+
+  .timeline-point {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 150px;
+    /* Ensure width for text */
+    flex-shrink: 0;
   }
 
   /* Reset Arrow for Horizontal */
   /* Reset Arrow for Horizontal */
   .journey-arrow {
     transform: rotate(0deg);
-    margin: 20px 0;
+    margin: 0 5px;
+    /* Reduce margin */
     animation: pulseArrowRight 2s infinite;
     display: flex !important;
-    /* Force visibility */
+    align-items: center;
+    justify-content: center;
     opacity: 1 !important;
-    min-width: 40px;
-    /* Ensure size */
+    min-width: 30px;
+    /* Smaller arrow container */
     color: var(--gold) !important;
     z-index: 10;
+    height: auto;
+    /* Allow height to fit */
+    align-self: center;
+    /* Vertically center */
   }
 
   @keyframes pulseArrowRight {
@@ -1790,6 +1806,22 @@ em {
     /* Gap handles spacing */
     flex-shrink: 0;
     /* Prevent shrinking */
+    height: auto;
+    /* Allow growth */
+    white-space: normal;
+    /* Allow text wrap */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* Align to top */
+  }
+
+  .bento-card h3,
+  .bento-card p {
+    white-space: normal;
+    /* Ensure text wraps */
+    overflow: visible;
+    /* Show all text */
   }
 
   /* Ensure Essentials cards (Bento) behave like cards on mobile */
@@ -1924,10 +1956,10 @@ em {
   height: 100% !important;
   border: none !important;
 }
+
 /* Force dark background for philosophy section to match the aesthetic */
 .philosophy {
   background-color: var(--ink);
   color: var(--paper);
   padding: 100px 0;
 }
-
