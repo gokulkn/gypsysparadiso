@@ -126,8 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Fallback Timeout (Force show after 2s)
     setTimeout(showMap, 2000);
   }
-});
-
   // 8. Desktop Review Navigation
   const reviewScroller = document.querySelector('.review-scroller');
   const prevBtn = document.querySelector('.nav-arrow.prev');
@@ -142,4 +140,5 @@ document.addEventListener('DOMContentLoaded', () => {
       reviewScroller.scrollBy({ left: 350, behavior: 'smooth' });
     });
   }
+});
 
