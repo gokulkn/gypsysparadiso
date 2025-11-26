@@ -127,3 +127,19 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(showMap, 2000);
   }
 });
+
+  // 8. Desktop Review Navigation
+  const reviewScroller = document.querySelector('.review-scroller');
+  const prevBtn = document.querySelector('.nav-arrow.prev');
+  const nextBtn = document.querySelector('.nav-arrow.next');
+
+  if (reviewScroller && prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => {
+      reviewScroller.scrollBy({ left: -350, behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      reviewScroller.scrollBy({ left: 350, behavior: 'smooth' });
+    });
+  }
+

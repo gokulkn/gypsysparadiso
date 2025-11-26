@@ -26,8 +26,10 @@ html {
 }
 
 body {
-  background-color: var(--paper);
-  color: var(--ink);
+  background-color: var(--ink);
+  /* Changed from paper to ink (black) to hide white gaps */
+  color: var(--paper);
+  /* Invert text color default */
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -1798,4 +1800,69 @@ em {
 .map-container {
   width: 100vw;
   margin-left: calc(50% - 50vw);
+  background: black;
+  /* Ensure container itself is black */
 }
+
+/* --- DESKTOP REVIEW NAVIGATION --- */
+.reviews-nav {
+  position: absolute;
+  top: 60%;
+  /* Push down to align with cards, not header */
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 10;
+  transform: translateY(-50%);
+  /* Center vertically */
+  padding: 0 20px;
+}
+
+.nav-arrow {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+  /* Re-enable clicks */
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.nav-arrow:hover {
+  background: var(--gold);
+  color: black;
+  transform: scale(1.1);
+}
+
+.desktop-only {
+  display: flex;
+}
+
+@media (max-width: 900px) {
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+
+/* --- FIX REVIEWS POSITIONING --- */
+.reviews {
+  position: relative;
+  /* Create positioning context for arrows */
+}
+/* Force map iframe to fill */
+.map-container iframe {
+  width: 100vw !important;
+  height: 100% !important;
+  border: none !important;
+}
+
