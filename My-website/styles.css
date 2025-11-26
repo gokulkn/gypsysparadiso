@@ -308,7 +308,8 @@ em {
 
 .text-col h2 {
   font-size: clamp(3.5rem, 8vw, 6rem);
-  margin-bottom: 30px;
+  margin-bottom: 5px;
+  /* Reduced for byline */
   line-height: 1;
   letter-spacing: -1px;
 }
@@ -1070,6 +1071,8 @@ em {
   /* Mobile Reviews */
   .review-scroller {
     padding: 10px 20px;
+    scroll-padding-left: 20px;
+    /* Fix first card alignment */
   }
 
   .review-card {
@@ -1086,6 +1089,13 @@ em {
   }
 
 
+
+  .map-container {
+    height: 50vh !important;
+    /* Fixed height for mobile */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
 
   .map-overlay-info {
     display: none !important;
@@ -1170,6 +1180,8 @@ em {
     /* Hide scrollbar for cleaner look */
     padding-right: 20px;
     /* Peek effect */
+    scroll-padding-left: 20px;
+    /* Fix first card alignment */
   }
 
   .bento-grid::-webkit-scrollbar {
@@ -1209,6 +1221,9 @@ em {
   .scroll-hint {
     display: block;
     /* Show only on mobile */
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+    opacity: 0.7;
   }
 }
 
@@ -1677,8 +1692,9 @@ em {
     flex-direction: column;
     align-items: center;
     /* Center everything */
-    gap: 15px;
-    margin-top: 30px;
+    gap: 40px;
+    /* Increased gap for less congestion */
+    margin-top: 40px;
     padding-left: 0;
     /* Remove previous padding */
   }
@@ -1725,5 +1741,59 @@ em {
       transform: rotate(90deg) translateY(5px);
       opacity: 1;
     }
+  }
+}
+
+/* --- LOCATION BYLINE --- */
+.location-byline {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  color: var(--gold);
+  font-style: italic;
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  display: block;
+  /* Ensure visibility */
+  position: relative;
+  z-index: 10;
+}
+
+@media (max-width: 900px) {
+  .location-byline {
+    font-size: 1.4rem;
+    margin-top: -15px;
+    margin-bottom: 20px;
+  }
+}
+
+/* --- NAV BYLINE --- */
+.nav-byline {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--gold);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  margin-top: 2px;
+  /* Fixed overlap */
+  letter-spacing: 0.5px;
+  text-shadow: none;
+}
+
+.brand {
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centered byline */
+}
+
+@media (max-width: 900px) {
+  .nav-byline {
+    font-size: 0.7rem;
+    /* Smaller on mobile to prevent congestion */
+    margin-top: 0px;
   }
 }
