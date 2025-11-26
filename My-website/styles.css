@@ -1092,9 +1092,18 @@ em {
 
   .map-container {
     height: 50vh !important;
-    /* Fixed height for mobile */
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100vw !important;
+    margin-left: -20px;
+    /* Counteract container padding if any */
+    border: none !important;
+    padding: 0 !important;
+    background: black;
+  }
+
+  .map-container iframe {
+    border: none !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 
   .map-overlay-info {
@@ -1692,11 +1701,10 @@ em {
     flex-direction: column;
     align-items: center;
     /* Center everything */
-    gap: 40px;
-    /* Increased gap for less congestion */
-    margin-top: 40px;
+    gap: 10px;
+    /* Reduced gap significantly */
+    margin-top: 30px;
     padding-left: 0;
-    /* Remove previous padding */
   }
 
   /* Remove old vertical line if present */
@@ -1733,12 +1741,14 @@ em {
 
     0%,
     100% {
-      transform: rotate(90deg) translateY(0);
+      transform: rotate(90deg) translateY(0) scale(1.5);
+      /* Larger arrow */
       opacity: 0.6;
     }
 
     50% {
-      transform: rotate(90deg) translateY(5px);
+      transform: rotate(90deg) translateY(5px) scale(1.5);
+      /* Larger arrow */
       opacity: 1;
     }
   }
