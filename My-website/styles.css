@@ -21,8 +21,9 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth;  <-- Removed for Lenis compatibility */
   font-size: 16px;
+  height: 100%;
 }
 
 body {
@@ -31,6 +32,8 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  overscroll-behavior: none;
+  /* App-like bounce prevention */
 }
 
 img {
@@ -307,7 +310,8 @@ em {
 
 /* --- 5. SECTIONS GENERAL --- */
 .section {
-  padding: 140px 0;
+  padding: 80px 0;
+  /* Optimized from 140px */
 }
 
 .container {
@@ -437,7 +441,7 @@ em {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: slide 40s linear infinite;
+  animation: slide 120s linear infinite;
   gap: 0;
 }
 
@@ -449,17 +453,35 @@ em {
   position: relative;
 }
 
+/* Vignette Overlay */
+.stream-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, transparent 40%, rgba(13, 20, 16, 0.6) 100%);
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.5s;
+}
+
+.stream-item:hover::after {
+  opacity: 0.4;
+  /* Lighten vignette on hover */
+}
+
 .stream-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s;
-  filter: grayscale(20%);
+  transition: transform 0.5s, filter 0.5s;
+  /* Aesthetic Filter: Cinematic, Moody, & Darker */
+  filter: contrast(1.1) saturate(0.9) sepia(0.15) brightness(0.85);
 }
 
 .stream-item:hover img {
   transform: scale(1.05);
-  filter: grayscale(0%);
+  /* Reveal True Colors on Hover */
+  filter: contrast(1) saturate(1) sepia(0) brightness(1);
 }
 
 @keyframes slide {
@@ -480,8 +502,10 @@ em {
   overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding-left: 10%;
+  justify-content: center;
+  /* Centered for split layout */
+  padding: 0 5%;
+  /* Balanced padding */
 }
 
 .panoramic-bg {
@@ -500,13 +524,109 @@ em {
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.2) 100%);
 }
 
 .panoramic-content {
   position: relative;
   z-index: 3;
+  width: 100%;
+  max-width: 1300px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* Memories Grid Styles */
+.memories-col {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.memories-wrapper {
+  text-align: center;
+}
+
+.memories-title {
+  font-family: var(--font-serif);
+  color: #fff;
+  /* White for better contrast */
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  font-style: italic;
+  /* Stronger shadow for readability against dark/busy backgrounds */
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9), 0 0 10px rgba(212, 175, 55, 0.3);
+  transform: rotate(-5deg);
+  letter-spacing: 1px;
+}
+
+.memories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  transform: rotate(-5deg);
+  width: 100%;
   max-width: 500px;
+}
+
+.memory-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  padding: 6px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.memory-card:hover {
+  transform: scale(1.15) rotate(3deg);
+  z-index: 10;
+  background: white;
+  border-color: white;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.memory-card img {
+  height: 140px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 2px;
+  transition: 0.4s;
+  /* Aesthetic Filter: Cinematic & Moody */
+  filter: contrast(1.1) saturate(0.9) sepia(0.1) brightness(0.95);
+}
+
+.memory-card:hover img {
+  /* Reveal True Colors on Hover */
+  filter: contrast(1) saturate(1) sepia(0) brightness(1);
+}
+
+/* Mobile Responsive for Split Layout */
+@media (max-width: 1024px) {
+  .panoramic-stay {
+    height: auto;
+    padding: 100px 20px;
+  }
+
+  .panoramic-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .memories-grid {
+    transform: none;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 100%;
+  }
+
+  .memory-card img {
+    height: 100px;
+  }
 }
 
 .glass-card {
@@ -588,7 +708,8 @@ em {
 
 .header-center {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
+  /* Reduced from 60px */
 }
 
 .header-center h2 {
@@ -637,7 +758,8 @@ em {
 
 /* --- NEW REVIEWS SECTION (Glass Scroll) --- */
 .reviews {
-  padding-bottom: 100px;
+  padding-bottom: 60px;
+  /* Reduced from 100px */
 }
 
 /* Extra space */
@@ -761,11 +883,13 @@ em {
 }
 
 /* --- MAP LOCATION --- */
+/* --- MAP LOCATION --- */
 .location {
   padding: 0;
+  position: relative;
 }
 
-.map-frame {
+.map-container {
   height: 80vh;
   width: 100%;
   position: relative;
@@ -773,15 +897,76 @@ em {
   overflow: hidden;
 }
 
-.map-frame iframe {
-  opacity: 0.95;
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  opacity: 0.85;
+  /* Darker map for mood */
   transition: opacity 0.5s;
-  filter: saturate(1.1) contrast(1.1);
+  filter: saturate(0.8) contrast(1.2) brightness(0.8);
+  /* Moody map filter */
   border: 0;
 }
 
-.map-frame:hover iframe {
+.map-container:hover iframe {
   opacity: 1;
+}
+
+/* --- GLOBAL MIST EFFECT --- */
+.mist-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+  mix-blend-mode: screen;
+  /* Better blending for mist */
+}
+
+.mist-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  /* Much subtler gradient to preserve black points */
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.01) 20%,
+      /* Reduced from 0.02 */
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0.02) 60%,
+      /* Reduced from 0.03 */
+      rgba(255, 255, 255, 0) 80%);
+  animation: drift 60s linear infinite;
+  opacity: 0.05;
+  /* Drastically reduced from 0.6 to preserve blacks */
+}
+
+.mist-layer:nth-child(2) {
+  animation-duration: 45s;
+  animation-direction: reverse;
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0) 10%,
+      rgba(255, 255, 255, 0.02) 30%,
+      /* Reduced from 0.03 */
+      rgba(255, 255, 255, 0) 50%,
+      rgba(255, 255, 255, 0.01) 70%,
+      /* Reduced from 0.02 */
+      rgba(255, 255, 255, 0) 90%);
+}
+
+@keyframes drift {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .map-overlay-info {
@@ -1051,13 +1236,11 @@ em {
   .text-col,
   .card {
     margin-bottom: 30px;
-    /* Reduced from 50px */
   }
 
   /* Reduce Vertical Gaps */
   .section {
-    padding: 40px 20px;
-    /* Reduced from 80px */
+    padding: 60px 20px;
   }
 
   .img-col img {
@@ -1067,12 +1250,15 @@ em {
   /* Mobile Panoramic */
   .panoramic-stay {
     height: auto;
-    padding: 80px 20px;
+    padding: 60px 20px;
     display: block;
   }
 
   .panoramic-content {
     max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
   }
 
   .glass-card {
@@ -1081,16 +1267,42 @@ em {
     background: rgba(0, 0, 0, 0.5);
   }
 
+  .glass-card h2 {
+    font-size: 2.5rem;
+    /* Smaller font for mobile */
+  }
+
   .specs-row {
     gap: 15px;
     justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  /* Mobile Memories Grid */
+  .memories-grid {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 Columns for mobile */
+    transform: none;
+    /* Remove rotation */
+    gap: 10px;
+  }
+
+  .memories-title {
+    font-size: 1.8rem;
+    transform: none;
+    /* Remove rotation */
+    margin-bottom: 20px;
+  }
+
+  .memory-card img {
+    height: 120px;
+    /* Adjust height */
   }
 
   /* Mobile Reviews */
   .review-scroller {
     padding: 10px 20px;
     scroll-padding-left: 20px;
-    /* Fix first card alignment */
   }
 
   .review-card {
@@ -1100,13 +1312,12 @@ em {
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-
+  /* Mobile Marquee - Larger Images */
   .stream-item {
-    width: 40vw;
-    height: 30vh;
+    width: 70vw;
+    /* Wider images on mobile */
+    height: 40vh;
   }
-
-
 
   .map-container {
     height: 50vh !important;
@@ -1126,7 +1337,6 @@ em {
     padding: 0 !important;
     border: none !important;
     background-color: black;
-    /* Ensure map sits on black to hide borders */
   }
 
   .map-container iframe {
@@ -1137,12 +1347,10 @@ em {
 
   .map-overlay-info {
     display: none !important;
-    /* Ensure it's gone */
   }
 
   .floating-cta {
     display: none !important;
-    /* Hidden on mobile as requested */
   }
 
   /* Fix Book Stay Button on Mobile */
@@ -1152,7 +1360,6 @@ em {
     font-size: 1rem;
     padding: 12px 25px;
   }
-
 
   .nav-bar {
     padding: 20px;

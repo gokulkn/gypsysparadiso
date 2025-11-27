@@ -1,3 +1,22 @@
+// Initialize Lenis Smooth Scroll
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  direction: 'vertical',
+  gestureDirection: 'vertical',
+  smooth: true,
+  mouseMultiplier: 1,
+  smoothTouch: false,
+  touchMultiplier: 2,
+});
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // 1. Navbar State
@@ -123,8 +142,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Listen for load event
     mapIframe.addEventListener('load', showMap);
 
-    // 2. Fallback Timeout (Force show after 2s)
-    setTimeout(showMap, 2000);
+    // 2. Fallback Timeout (Force show faster)
+    setTimeout(showMap, 500); // Reduced from 2000ms
   }
   // 8. Desktop Review Navigation
   const reviewScroller = document.querySelector('.review-scroller');
