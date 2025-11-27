@@ -1272,31 +1272,97 @@ em {
     /* Smaller font for mobile */
   }
 
+  /* Fix Nav Transparency on Mobile */
+  .nav-bar {
+    background: rgba(13, 20, 16, 0.95);
+    /* Solid dark background */
+    backdrop-filter: blur(10px);
+  }
+
+  /* Accommodation: Center 3rd Item (Elevation) */
   .specs-row {
     gap: 15px;
-    justify-content: space-between;
+    justify-content: center;
+    /* Center all */
     flex-wrap: wrap;
   }
 
-  /* Mobile Memories Grid */
+  .spec-item:nth-child(3) {
+    width: 100%;
+    /* Force new line */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  /* Mobile Memories Grid: Center Last Item */
   .memories-grid {
     grid-template-columns: repeat(2, 1fr);
-    /* 2 Columns for mobile */
     transform: none;
-    /* Remove rotation */
     gap: 10px;
   }
 
   .memories-title {
     font-size: 1.8rem;
     transform: none;
-    /* Remove rotation */
     margin-bottom: 20px;
   }
 
   .memory-card img {
     height: 120px;
-    /* Adjust height */
+  }
+
+  .memory-card:last-child {
+    grid-column: span 2;
+    /* Center the last odd item */
+    width: 60%;
+    /* Limit width so it doesn't look huge */
+    margin: 0 auto;
+    /* Center horizontally */
+  }
+
+  /* Rituals Revamp: Horizontal Swipe Deck */
+  .grid-triad {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding-bottom: 30px;
+    /* Space for scrollbar/touch */
+    margin: 0 -20px;
+    /* Negative margin to touch edges */
+    padding-left: 20px;
+    /* Restore padding */
+    padding-right: 20px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .grid-triad::-webkit-scrollbar {
+    display: none;
+    /* Hide scrollbar for clean look */
+  }
+
+  .grid-triad .card {
+    min-width: 85vw;
+    /* Immersive width */
+    scroll-snap-align: center;
+    margin-bottom: 0;
+    background: rgba(255, 255, 255, 0.05);
+    /* Glass card background */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
+  }
+
+  .grid-triad .card-img {
+    height: 250px;
+    /* Taller image */
+  }
+
+  .grid-triad .card h3 {
+    font-size: 1.5rem;
+    margin-top: 15px;
   }
 
   /* Mobile Reviews */
