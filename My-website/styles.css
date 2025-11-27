@@ -2319,3 +2319,115 @@ em {
   color: var(--paper);
   padding: 100px 0;
 }
+
+/* --- NEW FOOTER ELEMENTS --- */
+.insta-link {
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 1.1rem;
+  margin-left: 20px;
+  border-bottom: 1px solid transparent;
+  transition: border 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.insta-link:hover {
+  border-bottom-color: var(--gold);
+}
+
+.glass-connect-card {
+  background: rgba(13, 20, 16, 0.3);
+  /* Darker, more transparent base */
+  backdrop-filter: blur(5px);
+  /* Subtler blur */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  /* Fainter border */
+  border-radius: 16px;
+  padding: 25px 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 500px;
+  margin: 50px auto 0;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.glass-connect-card:hover {
+  transform: translateY(-5px);
+  background: rgba(13, 20, 16, 0.5);
+  /* Slightly more visible on hover */
+  border-color: rgba(192, 160, 98, 0.3);
+  /* Subtle gold hint on hover */
+}
+
+.connect-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  text-decoration: none;
+}
+
+.connect-icon {
+  font-size: 1.5rem;
+}
+
+.connect-text {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.highlight-phone {
+  color: var(--gold);
+  font-weight: 600;
+  font-size: 1.2rem;
+  /* Larger for traction */
+  letter-spacing: 1px;
+}
+
+.connect-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile Footer Optimization */
+@media (max-width: 768px) {
+  .cta-wrapper {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .insta-link {
+    margin-left: 0;
+    font-size: 1rem;
+  }
+
+  .glass-connect-card {
+    flex-direction: column;
+    gap: 20px;
+    padding: 25px;
+    width: 90%;
+    margin-top: 40px;
+  }
+
+  .connect-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .connect-item {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .highlight-phone {
+    font-size: 1.3rem;
+    /* Even larger on mobile for easy tapping */
+  }
+}
