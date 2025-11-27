@@ -474,8 +474,8 @@ em {
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s, filter 0.5s;
-  /* Aesthetic Filter: Cinematic, Moody, & Darker */
-  filter: contrast(1.1) saturate(0.9) sepia(0.15) brightness(0.85);
+  /* HD Clarity: Removed filters for sharp quality */
+  /* filter: contrast(1.1) saturate(0.9) sepia(0.15) brightness(0.85); */
 }
 
 .stream-item:hover img {
@@ -597,8 +597,8 @@ em {
   object-fit: cover;
   border-radius: 2px;
   transition: 0.4s;
-  /* Aesthetic Filter: Cinematic & Moody */
-  filter: contrast(1.1) saturate(0.9) sepia(0.1) brightness(0.95);
+  /* HD Clarity: Removed filters */
+  /* filter: contrast(1.1) saturate(0.9) sepia(0.1) brightness(0.95); */
 }
 
 .memory-card:hover img {
@@ -903,8 +903,8 @@ em {
   opacity: 0.85;
   /* Darker map for mood */
   transition: opacity 0.5s;
-  filter: saturate(0.8) contrast(1.2) brightness(0.8);
-  /* Moody map filter */
+  /* HD Clarity: Removed map filters */
+  /* filter: saturate(0.8) contrast(1.2) brightness(0.8); */
   border: 0;
 }
 
@@ -1272,18 +1272,16 @@ em {
     /* Smaller font for mobile */
   }
 
-  /* Fix Nav Transparency on Mobile */
+  /* Fix Nav Transparency on Mobile - FORCED OPAQUE */
   .nav-bar {
-    background: transparent !important;
-    /* Start transparent */
-    backdrop-filter: none;
-    transition: background 0.3s ease;
+    background: rgba(13, 20, 16, 0.98) !important;
+    backdrop-filter: blur(10px);
+    padding: 15px 20px;
+    /* Compact padding */
   }
 
   .nav-bar.scrolled {
     background: rgba(13, 20, 16, 0.98) !important;
-    /* Solid on scroll */
-    backdrop-filter: blur(10px);
   }
 
   /* Accommodation: Clean Balanced Layout */
@@ -1416,10 +1414,18 @@ em {
   }
 
   .review-card {
-    min-width: 300px;
+    min-width: 260px;
+    /* Compact width */
     height: auto;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    /* Compact padding */
+  }
+
+  .rc-text {
+    font-size: 0.9rem;
+    /* Compact text */
   }
 
   /* Mobile Marquee - Larger Images */
@@ -1544,13 +1550,31 @@ em {
   }
 
   .bento-card {
-    min-width: 280px;
-    /* Fixed width for cards */
+    min-width: 220px;
+    /* Compact width */
     scroll-snap-align: center;
     margin-bottom: 0;
-    /* Remove bottom margin in flex */
     margin-right: 15px;
-    /* Spacing between cards */
+    padding: 20px;
+    /* Compact padding */
+    border-radius: 16px;
+    /* Tighter radius */
+  }
+
+  .bento-icon {
+    font-size: 2rem;
+    /* Smaller icon */
+    margin-bottom: 10px;
+  }
+
+  .bento-title {
+    font-size: 1.3rem;
+    /* Smaller title */
+  }
+
+  .bento-text {
+    font-size: 0.9rem;
+    /* Smaller text */
   }
 }
 
