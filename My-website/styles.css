@@ -2450,10 +2450,8 @@ a[href^="tel:"] {
     /* Even larger on mobile for easy tapping */
   }
 }
-}
 
-/* Zoom Focus for Family Photo */
-.zoom-focus {
-  transform: scale(1.35) translateY(10%);
-  transform-origin: center top;
+/* Face Focus for Family Photo (No Zoom, just Position) */
+.face-focus {
+  object-position: center 25% !important;
 }
