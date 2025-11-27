@@ -475,7 +475,7 @@ em {
   object-fit: cover;
   transition: transform 0.5s, filter 0.5s;
   /* HD Clarity: Removed filters for sharp quality */
-  /* filter: contrast(1.1) saturate(0.9) sepia(0.15) brightness(0.85); */
+  filter: none;
 }
 
 .stream-item:hover img {
@@ -598,7 +598,7 @@ em {
   border-radius: 2px;
   transition: 0.4s;
   /* HD Clarity: Removed filters */
-  /* filter: contrast(1.1) saturate(0.9) sepia(0.1) brightness(0.95); */
+  filter: none;
 }
 
 .memory-card:hover img {
@@ -904,7 +904,7 @@ em {
   /* Darker map for mood */
   transition: opacity 0.5s;
   /* HD Clarity: Removed map filters */
-  /* filter: saturate(0.8) contrast(1.2) brightness(0.8); */
+  filter: none;
   border: 0;
 }
 
@@ -1414,18 +1414,18 @@ em {
   }
 
   .review-card {
-    min-width: 260px;
-    /* Compact width */
+    min-width: 240px;
+    /* Aggressive compact width */
     height: auto;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    /* Compact padding */
+    padding: 15px;
+    /* Tighter padding */
   }
 
   .rc-text {
-    font-size: 0.9rem;
-    /* Compact text */
+    font-size: 0.85rem;
+    /* Tiny text */
   }
 
   /* Mobile Marquee - Larger Images */
@@ -1550,31 +1550,41 @@ em {
   }
 
   .bento-card {
-    min-width: 220px;
-    /* Compact width */
+    min-width: 160px;
+    /* Aggressive compact width */
     scroll-snap-align: center;
     margin-bottom: 0;
     margin-right: 15px;
-    padding: 20px;
-    /* Compact padding */
-    border-radius: 16px;
+    padding: 15px;
+    /* Tighter padding */
+    border-radius: 12px;
     /* Tighter radius */
+    transform: none !important;
+    /* Disable pop-out */
+    box-shadow: none !important;
+  }
+
+  .bento-card:hover {
+    transform: none !important;
+    background: rgba(255, 255, 255, 0.05);
+    /* Keep background static */
   }
 
   .bento-icon {
-    font-size: 2rem;
-    /* Smaller icon */
-    margin-bottom: 10px;
+    font-size: 1.5rem;
+    /* Tiny icon */
+    margin-bottom: 5px;
   }
 
   .bento-title {
-    font-size: 1.3rem;
-    /* Smaller title */
+    font-size: 1rem;
+    /* Tiny title */
   }
 
   .bento-text {
-    font-size: 0.9rem;
-    /* Smaller text */
+    font-size: 0.8rem;
+    /* Tiny text */
+    line-height: 1.3;
   }
 }
 
