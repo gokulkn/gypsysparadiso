@@ -2322,8 +2322,8 @@ em {
 
 /* --- NEW FOOTER ELEMENTS --- */
 .insta-link {
-  color: var(--gold);
-  text-decoration: none;
+  color: var(--gold) !important;
+  text-decoration: none !important;
   font-size: 1.1rem;
   margin-left: 20px;
   border-bottom: 1px solid transparent;
@@ -2335,6 +2335,10 @@ em {
 
 .insta-link:hover {
   border-bottom-color: var(--gold);
+}
+
+.insta-link:visited {
+  color: var(--gold) !important;
 }
 
 .glass-connect-card {
@@ -2381,11 +2385,18 @@ em {
 }
 
 .highlight-phone {
-  color: var(--gold);
+  color: var(--gold) !important;
   font-weight: 600;
-  font-size: 1.2rem;
-  /* Larger for traction */
+  font-size: 1.3rem;
+  /* Increased size */
   letter-spacing: 1px;
+  text-decoration: none !important;
+}
+
+/* Force all phone links to be gold and no underline */
+a[href^="tel:"] {
+  color: var(--gold) !important;
+  text-decoration: none !important;
 }
 
 .connect-divider {
