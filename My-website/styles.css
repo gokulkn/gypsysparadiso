@@ -434,7 +434,7 @@ em {
 .visual-stream {
   padding: 0;
   overflow: hidden;
-  background: var(--paper);
+  background: var(--ink);
   margin-bottom: -5px;
 }
 
@@ -451,6 +451,17 @@ em {
   flex-shrink: 0;
   overflow: hidden;
   position: relative;
+  /* Premium Frame */
+  border: 1px solid var(--ink);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  transition: transform 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.stream-item:hover {
+  border-color: var(--gold);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(192, 160, 98, 0.1);
+  z-index: 10;
 }
 
 /* Vignette Overlay */
@@ -754,6 +765,11 @@ em {
 .card p {
   color: #888;
   font-size: 1rem;
+}
+
+/* Hide Swipe Hint on Desktop */
+.swipe-hint {
+  display: none;
 }
 
 /* --- NEW REVIEWS SECTION (Glass Scroll) --- */
@@ -1286,26 +1302,21 @@ em {
 
   /* Accommodation: Clean Balanced Layout */
   .specs-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
     justify-content: center;
-    flex-wrap: wrap;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 30px;
   }
 
   .spec-item {
-    flex: 0 1 auto;
-    /* Allow natural sizing */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     width: auto;
-    min-width: 100px;
-    /* Ensure they don't get too small */
     margin-bottom: 0;
-  }
-
-  .spec-item:nth-child(3) {
-    width: auto;
-    /* Reset forced width */
-    margin-top: 0;
-    display: block;
-    /* Reset display */
   }
 
   /* Mobile Memories Grid: Center Last Item */
@@ -1414,8 +1425,8 @@ em {
   }
 
   .review-card {
-    min-width: 240px;
-    /* Aggressive compact width */
+    min-width: 200px;
+    /* Reduced width for mobile optimization */
     height: auto;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1550,17 +1561,14 @@ em {
   }
 
   .bento-card {
-    min-width: 160px;
-    /* Aggressive compact width */
+    min-width: 140px;
+    /* Narrower than 160px, wider than 110px */
     scroll-snap-align: center;
     margin-bottom: 0;
     margin-right: 15px;
     padding: 15px;
-    /* Tighter padding */
     border-radius: 12px;
-    /* Tighter radius */
     transform: none !important;
-    /* Disable pop-out */
     box-shadow: none !important;
   }
 
@@ -2155,8 +2163,8 @@ em {
 
   .review-card,
   .bento-card {
-    min-width: 85vw;
-    /* Occupy most of screen */
+    min-width: 250px;
+    /* Reduced width as requested */
     scroll-snap-align: center;
     margin-right: 0;
     /* Gap handles spacing */
@@ -2441,4 +2449,11 @@ a[href^="tel:"] {
     font-size: 1.3rem;
     /* Even larger on mobile for easy tapping */
   }
+}
+}
+
+/* Zoom Focus for Family Photo */
+.zoom-focus {
+  transform: scale(1.35) translateY(10%);
+  transform-origin: center top;
 }
