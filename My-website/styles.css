@@ -1243,7 +1243,7 @@ em {
   max-width: 90%;
   max-height: 90vh;
   object-fit: contain;
-  transform: scale(0.9);
+  transform: scale(0.8);
   transition: transform 0.4s;
 }
 
@@ -1271,7 +1271,7 @@ em {
 
 /* Make stream items clickable */
 .stream-item {
-  cursor: zoom-in;
+  cursor: pointer;
 }
 
 @media (max-width: 900px) {
