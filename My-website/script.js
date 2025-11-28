@@ -145,18 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Fallback Timeout (Force show faster)
     setTimeout(showMap, 500); // Reduced from 2000ms
   }
-  // 8. Desktop Review Navigation
-  const reviewScroller = document.querySelector('.review-scroller');
-  const prevBtn = document.querySelector('.nav-arrow.prev');
-  const nextBtn = document.querySelector('.nav-arrow.next');
-
-  if (reviewScroller && prevBtn && nextBtn) {
-    prevBtn.addEventListener('click', () => {
-      reviewScroller.scrollBy({ left: -350, behavior: 'smooth' });
-    });
-
-    nextBtn.addEventListener('click', () => {
-      reviewScroller.scrollBy({ left: 350, behavior: 'smooth' });
-    });
-  }
+  // 8. Desktop Review Navigation (Handled via inline onclick in HTML for robustness)
+  // Logic removed to prevent conflicts
 });

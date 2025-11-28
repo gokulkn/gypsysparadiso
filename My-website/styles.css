@@ -13,6 +13,19 @@
   --ease: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+/* Screen Reader Only (SEO & Accessibility) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* --- 2. RESET & GLOBAL --- */
 * {
   margin: 0;
@@ -213,6 +226,8 @@ em {
 }
 
 .hero-title {
+  font-family: var(--font-serif);
+  /* Restored font */
   font-size: clamp(3.5rem, 8vw, 7rem);
   /* Optimized size */
   margin-bottom: 20px;
@@ -824,7 +839,24 @@ em {
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  /* Hide scrollbar Firefox */
+  scroll-behavior: smooth;
+  /* Added for JS scroll */
+}
+
+/* ... existing code ... */
+
+.reviews-nav {
+  position: absolute;
+  top: 60%;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 10001;
+  /* Super high to beat mist overlay */
+  transform: translateY(-50%);
+  padding: 0 20px;
 }
 
 .review-scroller::-webkit-scrollbar {
@@ -2259,20 +2291,7 @@ em {
 }
 
 /* --- DESKTOP REVIEW NAVIGATION --- */
-.reviews-nav {
-  position: absolute;
-  top: 60%;
-  /* Push down to align with cards, not header */
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  pointer-events: none;
-  z-index: 10;
-  transform: translateY(-50%);
-  /* Center vertically */
-  padding: 0 20px;
-}
+/* Duplicate .reviews-nav removed */
 
 .nav-arrow {
   background: rgba(0, 0, 0, 0.6);
