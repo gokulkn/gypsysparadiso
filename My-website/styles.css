@@ -1457,18 +1457,19 @@ em {
   }
 
   .review-card {
-    min-width: 200px;
-    /* Reduced width for mobile optimization */
+    min-width: 280px;
+    /* Increased width for better readability */
     height: auto;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    /* Tighter padding */
+    padding: 20px;
+    /* Increased padding */
   }
 
   .rc-text {
-    font-size: 0.85rem;
-    /* Tiny text */
+    font-size: 0.95rem;
+    /* Improved readability */
+    line-height: 1.5;
   }
 
   /* Mobile Marquee - Larger Images */
@@ -2473,4 +2474,214 @@ a[href^="tel:"] {
 /* Face Focus for Family Photo (No Zoom, just Position) */
 .face-focus {
   object-position: center 25% !important;
+}
+
+/* --- PULSE ANIMATION (CRO) --- */
+@keyframes pulse-gold {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+  }
+
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+  }
+}
+
+.pulse-gold {
+  animation: pulse-gold 2s infinite;
+}
+
+/* --- GOOGLE GOLD SEAL (CRO) --- */
+.google-seal {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 15px auto 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  /* Coin Base: Dark blended background */
+  background: radial-gradient(circle at 30% 30%, rgba(30, 35, 30, 0.9), rgba(10, 15, 10, 0.95));
+  /* Layering: 1. Thin Gold Edge, 2. Dark Outer Ring Shadow, 3. Inner Gold Rim Highlight */
+  border: 1px solid rgba(192, 160, 98, 0.6);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    /* Drop Shadow for blending */
+    inset 0 0 0 2px rgba(0, 0, 0, 0.5),
+    /* Dark groove inside border */
+    inset 0 0 10px rgba(192, 160, 98, 0.2);
+  /* Inner Gold Glow */
+  transition: transform 0.3s ease;
+  cursor: default;
+}
+
+.google-seal:hover {
+  transform: scale(1.05);
+  border-color: var(--gold);
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.5),
+    inset 0 0 15px rgba(192, 160, 98, 0.3);
+}
+
+/* Inner Gold Ring */
+.google-seal::after {
+  content: '';
+  position: absolute;
+  width: 64%;
+  /* Reduced to make room for text */
+  height: 64%;
+  border-radius: 50%;
+  border: 1px solid rgba(192, 160, 98, 0.3);
+  /* Subtle inner border */
+  pointer-events: none;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  /* Depth for inner circle */
+}
+
+.seal-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  margin-top: 0;
+  /* Text Layering: Pop off the coin face */
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+}
+
+.seal-score {
+  font-family: var(--font-sans);
+  font-size: 1.8rem;
+  /* Reduced from 2.2rem to fit in inner circle */
+  color: var(--gold);
+  line-height: 0.9;
+  font-weight: 700;
+  letter-spacing: -1px;
+  /* Metallic Text Effect */
+  background: linear-gradient(135deg, #fff0c4 0%, #c0a062 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.seal-stars {
+  color: var(--gold);
+  font-size: 0.45rem;
+  /* Reduced */
+  letter-spacing: 2px;
+  margin: 2px 0;
+  opacity: 0.9;
+}
+
+.seal-text {
+  font-family: var(--font-sans);
+  font-size: 0.3rem;
+  /* Reduced */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+/* Rotating Text Ring */
+.seal-text-circle {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: rotateSeal 30s linear infinite;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.seal-text-circle text {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  fill: #d4af37;
+  /* Solid Gold for contrast */
+  text-transform: uppercase;
+}
+
+@keyframes rotateSeal {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile Optimization for Seal */
+@media (max-width: 768px) {
+  .google-seal {
+    width: 85px;
+    height: 85px;
+    margin-top: 20px;
+  }
+
+  .seal-score {
+    font-size: 1.5rem;
+    /* Reduced for mobile */
+  }
+
+  .seal-stars {
+    font-size: 0.4rem;
+    letter-spacing: 1px;
+    margin: 2px 0;
+  }
+
+  .seal-text {
+    font-size: 0.25rem;
+    /* Reduced for mobile */
+  }
+
+  .seal-text-circle text {
+    font-size: 11px;
+  }
+
+  .hero-btn {
+    margin-bottom: 10px;
+  }
+}
+
+/* --- MAP CONTAINER (Lazy Load Fix) --- */
+.section.location {
+  padding: 0 !important;
+  /* Force full width */
+}
+
+.map-container {
+  width: 100%;
+  height: 450px;
+  /* Fixed height to ensure visibility for Observer */
+  background: #0D1410;
+  /* Dark background to prevent white flash */
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+  /* Full width, no corners */
+  margin-top: 0;
+  /* Remove gap */
+  z-index: 950;
+  /* Lift above everything except nav */
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  /* Balanced Vegetative: Natural boost */
+  filter: saturate(1.2) contrast(1.1) brightness(0.95);
 }

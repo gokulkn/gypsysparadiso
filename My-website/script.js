@@ -130,20 +130,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 6. Robust Map Loading (Hard Reset)
-  const mapIframe = document.getElementById('googleMap');
+  // 6. Map Loading (Standard)
   const mapContainer = document.querySelector('.map-container');
-
-  if (mapIframe && mapContainer) {
-    const showMap = () => {
-      mapContainer.classList.add('loaded');
-    };
-
-    // 1. Listen for load event
-    mapIframe.addEventListener('load', showMap);
-
-    // 2. Fallback Timeout (Force show faster)
-    setTimeout(showMap, 500); // Reduced from 2000ms
+  if (mapContainer) {
+    mapContainer.classList.add('loaded');
   }
   // 8. Desktop Review Navigation (Handled via inline onclick in HTML for robustness)
   // Logic removed to prevent conflicts
