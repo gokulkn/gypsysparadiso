@@ -2648,8 +2648,8 @@ a[href^="tel:"] {
   }
 
   .seal-text-circle text {
-    font-size: 8.5px;
-    letter-spacing: 2.2px;
+    font-size: 10px;
+    letter-spacing: 2.5px;
   }
 
   .hero-btn {
