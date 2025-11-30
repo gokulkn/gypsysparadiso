@@ -2686,3 +2686,15 @@ a[href^="tel:"] {
   /* Balanced Vegetative: Natural boost */
   filter: saturate(1.2) contrast(1.1) brightness(0.95);
 }
+
+/* Text Link (Invisible/Seamless) */
+.text-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.text-link:hover {
+  opacity: 0.8;
+}
