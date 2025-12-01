@@ -137,4 +137,43 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // 8. Desktop Review Navigation (Handled via inline onclick in HTML for robustness)
   // Logic removed to prevent conflicts
+
+  // 9. Adventure Warning Modal
+  const modal = document.getElementById('adventure-modal');
+  const confirmBtn = document.getElementById('modal-confirm');
+  const cancelBtn = document.getElementById('modal-cancel');
+  let pendingUrl = '';
+
+  if (modal && confirmBtn && cancelBtn) {
+    // Intercept all Booking Links
+    document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        pendingUrl = link.href;
+        modal.classList.add('active');
+      });
+    });
+
+    // Confirm Action
+    confirmBtn.addEventListener('click', () => {
+      if (pendingUrl) {
+        window.open(pendingUrl, '_blank');
+        modal.classList.remove('active');
+        pendingUrl = '';
+      }
+    });
+
+    // Cancel Action
+    cancelBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+      pendingUrl = '';
+    });
+
+    // Close on Outside Click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+  }
 });
