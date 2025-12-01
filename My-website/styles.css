@@ -2920,4 +2920,20 @@ a[href^="tel:"] {
     width: 80%;
     /* Button-like touch targets */
   }
+
+  .footer-links a {
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    width: 80%;
+    /* Button-like touch targets */
+  }
+}
+
+/* Widget Safety Container */
+#insta-feed-container {
+  max-width: 100%;
+  overflow: hidden;
+  padding: 0 15px;
+  /* Prevent edge touching on mobile */
 }
