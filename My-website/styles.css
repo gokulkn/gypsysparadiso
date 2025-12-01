@@ -2937,3 +2937,34 @@ a[href^="tel:"] {
   padding: 0 15px;
   /* Prevent edge touching on mobile */
 }
+
+/* Fix for Social Feed Username on Mobile */
+@media (max-width: 480px) {
+  .header-center h2 {
+    font-size: 1.8rem !important;
+    /* Prevent long username from breaking layout */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    line-height: 1.2;
+    padding: 0 10px;
+  }
+}
+
+/* Clickable Instagram Handle */
+.insta-handle-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  cursor: pointer;
+  /* Force pointer on all devices */
+  position: relative;
+  /* Ensure z-index works if needed */
+  z-index: 10;
+}
+
+.insta-handle-link:hover,
+.insta-handle-link:active {
+  /* :active for Mobile Touch */
+  color: var(--gold);
+  opacity: 0.8;
+}
