@@ -2873,3 +2873,51 @@ a[href^="tel:"] {
     width: 100%;
   }
 }
+
+/* Footer Links Optimization */
+.footer-links {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--gold);
+}
+
+.footer-sep {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 600px) {
+  .footer-links {
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+  }
+
+  .footer-sep {
+    display: none;
+    /* Hide pipes on mobile */
+  }
+
+  .footer-links a {
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    width: 80%;
+    /* Button-like touch targets */
+  }
+}
