@@ -61,7 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       fetch(finalUrl, {
         method: "GET",
-        mode: "no-cors" // Still needed to avoid CORS errors in browser console
+        mode: "no-cors", // Still needed to avoid CORS errors in browser console
+        keepalive: true  // Crucial: Ensures request completes even if page unloads
       }).then(() => {
         console.log("Tracking sent");
       }).catch(err => {
