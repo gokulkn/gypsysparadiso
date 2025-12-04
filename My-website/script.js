@@ -113,6 +113,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.reveal-text, .reveal-img, .reveal-up, .reveal-block, .journey-timeline, #insta-feed-container').forEach(el => {
       observer.observe(el);
     });
+
+    // Fallback: Force load Instagram after 4 seconds (Fix for mobile)
+    setTimeout(() => {
+      if (!document.querySelector('script[src*="elfsightcdn.com"]')) {
+        const script = document.createElement('script');
+        script.src = "https://elfsightcdn.com/platform.js";
+        script.async = true;
+        document.body.appendChild(script);
+        console.log("Instagram Widget Loaded (Fallback)");
+      }
+    }, 4000);
   } else {
     // Fallback for older browsers or failures
     document.querySelectorAll('.reveal-text, .reveal-img, .reveal-up, .reveal-block').forEach(el => {
