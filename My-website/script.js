@@ -84,52 +84,38 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 2. Reveal Animations (Safety Check)
+  // 2. Reveal Animations (Safety Check)
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
-
-          // Trigger Journey Line Animation
-          if (entry.target.classList.contains('journey-timeline')) {
-            // Optional: Add specific logic if needed, but CSS transition handles it via .active
-          }
-
-          // Lazy Load Instagram Widget
-          if (entry.target.id === 'insta-feed-container') {
-            if (!document.querySelector('script[src*="elfsightcdn.com"]')) {
-              const script = document.createElement('script');
-              script.src = "https://elfsightcdn.com/platform.js";
-              script.async = true;
-              document.body.appendChild(script);
-              console.log("Instagram Widget Loaded");
-            }
-            observer.unobserve(entry.target);
-          }
+          observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.15 });
 
-    document.querySelectorAll('.reveal-text, .reveal-img, .reveal-up, .reveal-block, .journey-timeline, #insta-feed-container').forEach(el => {
+    document.querySelectorAll('.reveal-text, .reveal-img, .reveal-up, .reveal-block, .journey-timeline').forEach(el => {
       observer.observe(el);
     });
-
-    // Fallback: Force load Instagram after 4 seconds (Fix for mobile)
-    setTimeout(() => {
-      if (!document.querySelector('script[src*="elfsightcdn.com"]')) {
-        const script = document.createElement('script');
-        script.src = "https://elfsightcdn.com/platform.js";
-        script.async = true;
-        document.body.appendChild(script);
-        console.log("Instagram Widget Loaded (Fallback)");
-      }
-    }, 4000);
   } else {
-    // Fallback for older browsers or failures
+    // Fallback for older browsers
     document.querySelectorAll('.reveal-text, .reveal-img, .reveal-up, .reveal-block').forEach(el => {
       el.classList.add('active');
     });
   }
+
+  // --- INSTAGRAM WIDGET LOADER (Simple & Robust) ---
+  // Load after 3 seconds to allow initial page render, then force load.
+  setTimeout(() => {
+    if (!document.querySelector('script[src*="elfsightcdn.com"]')) {
+      const script = document.createElement('script');
+      script.src = "https://elfsightcdn.com/platform.js";
+      script.async = true;
+      document.body.appendChild(script);
+      console.log("Instagram Widget Loaded (Timer)");
+    }
+  }, 3000);
 
   // Force visibility fallback
   setTimeout(() => {
