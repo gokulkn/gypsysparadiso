@@ -47,6 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Send to Google Sheet (Fire and Forget)
     if (TRACKING_URL && TRACKING_URL !== "YOUR_GOOGLE_SCRIPT_URL_HERE") {
+      // DEBUG: Remove this alert after testing
+      alert("Debug: Sending tracking data to Google Sheet...");
+
       fetch(TRACKING_URL, {
         method: "POST",
         mode: "no-cors",
@@ -54,7 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
-      }).catch(err => console.log("Tracking Error:", err));
+      }).then(() => {
+        console.log("Tracking sent");
+      }).catch(err => {
+        alert("Tracking Error: " + err);
+      });
     } else {
       console.log("Tracking Simulation:", data);
     }
