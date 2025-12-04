@@ -45,22 +45,27 @@ document.addEventListener('DOMContentLoaded', () => {
       page: window.location.pathname
     };
 
-    // 3. Send to Google Sheet (Fire and Forget)
+    // 3. Send to Google Sheet (Using GET for reliability)
     if (TRACKING_URL && TRACKING_URL !== "YOUR_GOOGLE_SCRIPT_URL_HERE") {
-      // DEBUG: Remove this alert after testing
-      alert("Debug: Sending tracking data to Google Sheet...");
+      // Construct URL with parameters
+      const params = new URLSearchParams({
+        platform: platform,
+        device: isMobile,
+        page: window.location.pathname
+      });
 
-      fetch(TRACKING_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
+      const finalUrl = `${TRACKING_URL}?${params.toString()}`;
+
+      // DEBUG: Remove this alert after testing
+      // alert("Debug: Sending to " + finalUrl);
+
+      fetch(finalUrl, {
+        method: "GET",
+        mode: "no-cors" // Still needed to avoid CORS errors in browser console
       }).then(() => {
         console.log("Tracking sent");
       }).catch(err => {
-        alert("Tracking Error: " + err);
+        console.error("Tracking Error:", err);
       });
     } else {
       console.log("Tracking Simulation:", data);
