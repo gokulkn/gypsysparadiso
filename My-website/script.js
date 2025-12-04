@@ -59,8 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // DEBUG: Remove this alert after testing
       // alert("Debug: Sending to " + finalUrl);
 
-      const finalUrl = `${TRACKING_URL}?${params.toString()}`;
-
       // 3. Send to Google Sheet (Pixel Method - 100% Reliable)
       // We creates an invisible image. The browser tries to load it, 
       // which sends the GET request to our script.
