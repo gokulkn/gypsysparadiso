@@ -881,17 +881,16 @@
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
   <!-- Simple & Robust Instagram Loader -->
   <script>
-    window.addEventListener('load', function () {
-      setTimeout(function () {
-        if (!document.querySelector('script[src*="elfsightcdn.com"]')) {
-          var script = document.createElement('script');
-          script.src = "https://elfsightcdn.com/platform.js";
-          script.async = true;
-          document.body.appendChild(script);
-          console.log("Instagram Widget Loaded (Inline)");
-        }
-      }, 3000);
-    });
+    // Load Instagram Widget IMMEDIATELY (Non-blocking)
+    setTimeout(function () {
+      if (!document.querySelector('script[src*="elfsightcdn.com"]')) {
+        var script = document.createElement('script');
+        script.src = "https://elfsightcdn.com/platform.js";
+        script.async = true;
+        document.body.appendChild(script);
+        console.log("Instagram Widget Loaded (Instant)");
+      }
+    }, 0);
   </script>
   <script src="script.js"></script>
 
