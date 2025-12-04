@@ -144,16 +144,15 @@
   }
   </script>
 
-  <!-- Google Analytics (GA4) - Placeholder -->
-  <!--
+  <!-- Google Analytics (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
+
     gtag('config', 'G-XXXXXXXXXX');
   </script>
-  -->
 
   <!-- Meta Pixel Code - Placeholder -->
   <!--
@@ -217,7 +216,7 @@
   <header class="hero">
     <div class="hero-img-container">
       <img src="images/luxury-glamping-resort-vattavada-munnar.jpeg" width="1920" height="1080"
-        alt="Luxury Glamping Resort in Vattavada Munnar Landscape" class="parallax-img">
+        alt="Luxury Glamping Resort in Vattavada Munnar Landscape" class="parallax-img" fetchpriority="high">
       <div class="hero-scrim"></div>
     </div>
 
@@ -303,8 +302,7 @@
       -->
       <div id="insta-feed-container" class="reveal-up delay-1"
         style="min-height: 500px; margin-top: 30px; text-align: center;">
-        <!-- Elfsight Instagram Feed -->
-        <script src="https://elfsightcdn.com/platform.js" async></script>
+        <!-- Elfsight Instagram Feed (Lazy Loaded via script.js) -->
         <div class="elfsight-app-af33837e-f533-413c-a5e7-41dcd66ccd72" data-elfsight-app-lazy></div>
       </div>
 
@@ -316,62 +314,86 @@
     <div class="marquee-track">
       <!-- Batch 1: Legacy & Mood -->
       <div class="stream-item"><img src="images/optimized/night-camping-vattavada.jpeg" width="600" height="800"
-          alt="Night"></div>
+          alt="Night" loading="lazy"></div>
       <div class="stream-item"><img src="images/optimized/happy-moments-munnar.jpg" width="600" height="800"
-          alt="Moments"></div>
+          alt="Moments" loading="lazy"></div>
       <!-- Replaced img20 (Grid) -->
       <div class="stream-item"><img src="images/optimized/misty-morning-glamping.jpeg" width="600" height="800"
-          alt="Mist"></div>
-      <div class="stream-item"><img src="images/optimized/camping-vibes-kerala.jpg" width="600" height="800" alt="Vibe">
+          alt="Mist" loading="lazy"></div>
+      <div class="stream-item"><img src="images/optimized/camping-vibes-kerala.jpg" width="600" height="800" alt="Vibe"
+          loading="lazy">
       </div>
-      <div class="stream-item"><img src="images/optimized/nature-resort-scene.jpg" width="600" height="800" alt="Scene">
+      <div class="stream-item"><img src="images/optimized/nature-resort-scene.jpg" width="600" height="800" alt="Scene"
+          loading="lazy">
       </div>
 
       <!-- Batch 2: People & Action -->
-      <div class="stream-item"><img src="images/optimized/img48.jpg" width="600" height="800" alt="Experience"></div>
-      <div class="stream-item"><img src="images/optimized/img6.jpg" width="600" height="800" alt="Scene"></div>
-      <div class="stream-item"><img src="images/optimized/img11.jpg" width="600" height="800" alt="Nature"></div>
+      <div class="stream-item"><img src="images/optimized/img48.jpg" width="600" height="800" alt="Experience"
+          loading="lazy"></div>
+      <div class="stream-item"><img src="images/optimized/img6.jpg" width="600" height="800" alt="Scene" loading="lazy">
+      </div>
+      <div class="stream-item"><img src="images/optimized/img11.jpg" width="600" height="800" alt="Nature"
+          loading="lazy"></div>
       <!-- Replaced img10 (Similar to img6) -->
-      <div class="stream-item"><img src="images/optimized/img46.jpg" width="600" height="800" alt="Tent"></div>
+      <div class="stream-item"><img src="images/optimized/img46.jpg" width="600" height="800" alt="Tent" loading="lazy">
+      </div>
       <!-- Replaced 2.jpeg (Grid) -->
-      <div class="stream-item"><img src="images/optimized/img34.jpg" width="600" height="800" alt="Stories"></div>
+      <div class="stream-item"><img src="images/optimized/img34.jpg" width="600" height="800" alt="Stories"
+          loading="lazy"></div>
 
       <!-- Batch 3: New Additions (Expanded Collection) -->
-      <div class="stream-item"><img src="images/optimized/img3.jpg" width="600" height="800" alt="Scene"></div>
-      <div class="stream-item"><img src="images/optimized/img31.jpg" width="600" height="800" alt="Scene"></div>
+      <div class="stream-item"><img src="images/optimized/img3.jpg" width="600" height="800" alt="Scene" loading="lazy">
+      </div>
+      <div class="stream-item"><img src="images/optimized/img31.jpg" width="600" height="800" alt="Scene"
+          loading="lazy"></div>
       <div class="stream-item"><img src="images/optimized/img9.jpg" width="600" height="800"
-          alt="Nature Scene near Chilanthiyar Falls Vattavada"></div>
-      <div class="stream-item"><img src="images/optimized/img13.jpg" width="600" height="800" alt="Scene"></div>
-      <div class="stream-item"><img src="images/optimized/img14.jpg" width="600" height="800" alt="Scene"></div>
-      <div class="stream-item"><img src="images/optimized/img28.jpg" width="600" height="800" alt="Scene"></div>
+          alt="Nature Scene near Chilanthiyar Falls Vattavada" loading="lazy"></div>
+      <div class="stream-item"><img src="images/optimized/img13.jpg" width="600" height="800" alt="Scene"
+          loading="lazy"></div>
+      <div class="stream-item"><img src="images/optimized/img14.jpg" width="600" height="800" alt="Scene"
+          loading="lazy"></div>
+      <div class="stream-item"><img src="images/optimized/img28.jpg" width="600" height="800" alt="Scene"
+          loading="lazy"></div>
 
       <!-- Batch 4: More Variety -->
-      <div class="stream-item"><img src="images/optimized/img15.jpg" width="600" height="800" alt="Scene"></div>
-      <div class="stream-item"><img src="images/optimized/img4.jpg" width="600" height="800" alt="Scene"></div>
-      <div class="stream-item"><img src="images/optimized/img29.jpg" width="600" height="800" alt="Scene"></div>
-      <div class="stream-item"><img src="images/optimized/img19.jpg" width="600" height="800" alt="Scene"></div>
-      <div class="stream-item"><img src="images/optimized/img44.jpg" width="600" height="800" alt="Scene"></div>
+      <div class="stream-item"><img src="images/optimized/img15.jpg" width="600" height="800" alt="Scene"
+          loading="lazy"></div>
+      <div class="stream-item"><img src="images/optimized/img4.jpg" width="600" height="800" alt="Scene" loading="lazy">
+      </div>
+      <div class="stream-item"><img src="images/optimized/img29.jpg" width="600" height="800" alt="Scene"
+          loading="lazy"></div>
+      <div class="stream-item"><img src="images/optimized/img19.jpg" width="600" height="800" alt="Scene"
+          loading="lazy"></div>
+      <div class="stream-item"><img src="images/optimized/img44.jpg" width="600" height="800" alt="Scene"
+          loading="lazy"></div>
 
       <!-- Batch 5: Final Mix -->
-      <div class="stream-item"><img src="images/optimized/img37.jpg" width="600" height="800" alt="Scene"></div>
+      <div class="stream-item"><img src="images/optimized/img37.jpg" width="600" height="800" alt="Scene"
+          loading="lazy"></div>
       <!-- Replaced img7 (Grid) -->
-      <div class="stream-item"><img src="images/optimized/img27.jpg" width="600" height="800" alt="Scene"></div>
-      <div class="stream-item"><img src="images/optimized/img12.jpg" width="600" height="800" alt="Scene"></div>
+      <div class="stream-item"><img src="images/optimized/img27.jpg" width="600" height="800" alt="Scene"
+          loading="lazy"></div>
+      <div class="stream-item"><img src="images/optimized/img12.jpg" width="600" height="800" alt="Scene"
+          loading="lazy"></div>
       <!-- Replaced img5 (Grid) -->
-      <div class="stream-item"><img src="images/optimized/img51.jpg" width="600" height="800" alt="Scene"></div>
+      <div class="stream-item"><img src="images/optimized/img51.jpg" width="600" height="800" alt="Scene"
+          loading="lazy"></div>
       <!-- Replaced img33 (Rituals) -->
-      <div class="stream-item"><img src="images/optimized/img36.jpg" width="600" height="800" alt="Scene"></div>
-      <div class="stream-item"><img src="images/optimized/img50.jpg" width="600" height="800" alt="Scene"></div>
+      <div class="stream-item"><img src="images/optimized/img36.jpg" width="600" height="800" alt="Scene"
+          loading="lazy"></div>
+      <div class="stream-item"><img src="images/optimized/img50.jpg" width="600" height="800" alt="Scene"
+          loading="lazy"></div>
       <!-- Replaced img2 (Grid) -->
 
       <!-- Loop Buffer (First few repeated) -->
       <div class="stream-item"><img src="images/optimized/night-camping-vattavada.jpeg" width="600" height="800"
-          alt="Night"></div>
+          alt="Night" loading="lazy"></div>
       <div class="stream-item"><img src="images/optimized/happy-moments-munnar.jpg" width="600" height="800"
-          alt="Moments"></div>
+          alt="Moments" loading="lazy"></div>
       <div class="stream-item"><img src="images/optimized/misty-morning-glamping.jpeg" width="600" height="800"
-          alt="Mist"></div>
-      <div class="stream-item"><img src="images/optimized/camping-vibes-kerala.jpg" width="600" height="800" alt="Vibe">
+          alt="Mist" loading="lazy"></div>
+      <div class="stream-item"><img src="images/optimized/camping-vibes-kerala.jpg" width="600" height="800" alt="Vibe"
+          loading="lazy">
       </div>
     </div>
   </section>

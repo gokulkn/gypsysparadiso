@@ -94,11 +94,23 @@ document.addEventListener('DOMContentLoaded', () => {
           if (entry.target.classList.contains('journey-timeline')) {
             // Optional: Add specific logic if needed, but CSS transition handles it via .active
           }
+
+          // Lazy Load Instagram Widget
+          if (entry.target.id === 'insta-feed-container') {
+            if (!document.querySelector('script[src*="elfsightcdn.com"]')) {
+              const script = document.createElement('script');
+              script.src = "https://elfsightcdn.com/platform.js";
+              script.async = true;
+              document.body.appendChild(script);
+              console.log("Instagram Widget Loaded");
+            }
+            observer.unobserve(entry.target);
+          }
         }
       });
     }, { threshold: 0.15 });
 
-    document.querySelectorAll('.reveal-text, .reveal-img, .reveal-up, .reveal-block, .journey-timeline').forEach(el => {
+    document.querySelectorAll('.reveal-text, .reveal-img, .reveal-up, .reveal-block, .journey-timeline, #insta-feed-container').forEach(el => {
       observer.observe(el);
     });
   } else {
