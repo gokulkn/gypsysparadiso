@@ -31,6 +31,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 2. Reveal Animations
   // 2. Reveal Animations (Safety Check)
+  // --- CLICK TRACKING SYSTEM ---
+  const TRACKING_URL = "https://script.google.com/macros/s/AKfycbySWjGsWwr1uviYmLf52u36V2Hl4RaOY0PW9aXZH9uW5J3xaqt7N4mZ02mVK1NcQbh0HA/exec";
+
+  function trackClick(platform) {
+    // 1. Detect Device
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) ? "Mobile" : "Desktop";
+
+    // 2. Prepare Data
+    const data = {
+      platform: platform,
+      device: isMobile,
+      page: window.location.pathname
+    };
+
+    // 3. Send to Google Sheet (Fire and Forget)
+    if (TRACKING_URL && TRACKING_URL !== "YOUR_GOOGLE_SCRIPT_URL_HERE") {
+      fetch(TRACKING_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      }).catch(err => console.log("Tracking Error:", err));
+    } else {
+      console.log("Tracking Simulation:", data);
+    }
+  }
+
+  // Attach Listeners Immediately
+  const waLinks = document.querySelectorAll('a[href*="wa.me"]');
+  waLinks.forEach(link => {
+    link.addEventListener('click', () => trackClick('WhatsApp'));
+  });
+
+  const instaLinks = document.querySelectorAll('a[href*="instagram.com"]');
+  instaLinks.forEach(link => {
+    link.addEventListener('click', () => trackClick('Instagram'));
+  });
+
+  // 2. Reveal Animations (Safety Check)
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
