@@ -105,17 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- INSTAGRAM WIDGET LOADER (Simple & Robust) ---
-  // Load after 3 seconds to allow initial page render, then force load.
-  setTimeout(() => {
-    if (!document.querySelector('script[src*="elfsightcdn.com"]')) {
-      const script = document.createElement('script');
-      script.src = "https://elfsightcdn.com/platform.js";
-      script.async = true;
-      document.body.appendChild(script);
-      console.log("Instagram Widget Loaded (Timer)");
-    }
-  }, 3000);
+
 
   // Force visibility fallback
   setTimeout(() => {
