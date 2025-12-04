@@ -59,15 +59,16 @@ document.addEventListener('DOMContentLoaded', () => {
       // DEBUG: Remove this alert after testing
       // alert("Debug: Sending to " + finalUrl);
 
-      fetch(finalUrl, {
-        method: "GET",
-        mode: "no-cors", // Still needed to avoid CORS errors in browser console
-        keepalive: true  // Crucial: Ensures request completes even if page unloads
-      }).then(() => {
-        console.log("Tracking sent");
-      }).catch(err => {
-        console.error("Tracking Error:", err);
-      });
+      const finalUrl = `${TRACKING_URL}?${params.toString()}`;
+
+      // 3. Send to Google Sheet (Pixel Method - 100% Reliable)
+      // We creates an invisible image. The browser tries to load it, 
+      // which sends the GET request to our script.
+      const pixel = new Image();
+      pixel.src = finalUrl;
+
+      console.log("Tracking pixel fired");
+
     } else {
       console.log("Tracking Simulation:", data);
     }
