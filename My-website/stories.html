@@ -102,9 +102,89 @@
         }
 
         .read-more span {
-            color: var(--gold);
-            font-size: 1.2rem;
-        }
+            < !DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Stories from the Sanctuary | Gypsys Paradiso Blog</title><meta name="description"
+            content="Read stories about Vattavada, Munnar, and the hidden secrets of the Shola forests. Travel tips, trekking guides, and more from Gypsys Paradiso."><meta name="keywords"
+            content="Vattavada Blog, Munnar Travel Guide, Hidden Gems Munnar, Trekking Stories Kerala, Gypsys Paradiso Stories"><meta name="author" content="Gypsys Paradiso"><link rel="canonical" href="https://gypsysparadiso.in/stories.html">< !-- Favicon --><link rel="icon" type="image/png" href="images/favicon.png">< !-- CSS & Fonts --><link rel="stylesheet" href="styles.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Outfit:wght@200;300;400;500;600&display=swap"
+            rel="stylesheet">< !-- Google Search Console Verification --><meta name="google-site-verification" content="CbzmgTups2kDYR2YTqm6U1ggNnkWHOx5EGUcRyXdBeY" /><style>
+
+            /* Specific Styles for Stories Page */
+            .stories-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 40px;
+                padding: 40px 0;
+            }
+
+            .story-card {
+                background: rgba(20, 20, 20, 0.6);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 4px;
+                overflow: hidden;
+                transition: transform 0.4s ease, border-color 0.4s ease;
+                text-decoration: none;
+                display: block;
+            }
+
+            .story-card:hover {
+                transform: translateY(-5px);
+                border-color: var(--gold);
+            }
+
+            .story-img {
+                width: 100%;
+                height: 250px;
+                object-fit: cover;
+                filter: grayscale(20%);
+                transition: filter 0.4s ease;
+            }
+
+            .story-card:hover .story-img {
+                filter: grayscale(0%);
+            }
+
+            .story-content {
+                padding: 25px;
+            }
+
+            .story-date {
+                font-family: 'Outfit', sans-serif;
+                font-size: 0.8rem;
+                color: var(--gold);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 10px;
+                display: block;
+            }
+
+            .story-title {
+                font-family: 'Cormorant Garamond', serif;
+                font-size: 1.8rem;
+                color: white;
+                margin-bottom: 15px;
+                line-height: 1.2;
+            }
+
+            .story-excerpt {
+                font-family: 'Outfit', sans-serif;
+                font-size: 0.95rem;
+                color: #aaa;
+                line-height: 1.6;
+            }
+
+            .read-more {
+                margin-top: 20px;
+                font-family: 'Outfit', sans-serif;
+                font-size: 0.9rem;
+                color: white;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .read-more span {
+                color: var(--gold);
+                font-size: 1.2rem;
+            }
     </style>
 </head>
 
@@ -133,6 +213,617 @@
             </div>
         </div>
     </header>
+
+    <!-- STORIES GRID -->
+    <section class="section dark-mode">
+        <div class="container">
+            <div class="stories-grid">
+
+                <!-- Story 1 -->
+                <a href="stories/best-time-to-visit-vattavada.html" class="story-card reveal-up">
+                    <img src="images/optimized/img13.jpg" alt="Best time to visit Vattavada" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Travel Guide</span>
+                        <h3 class="story-title">The Best Time to Visit Vattavada: A Seasonal Guide</h3>
+                        <p class="story-excerpt">Vattavada changes its colors with every season. From the purple blooms
+                            of Neelakurinji to the winter frost, find out when you should plan your escape.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 2 -->
+                <a href="stories/hidden-gems-munnar.html" class="story-card reveal-up delay-1">
+                    <img src="images/optimized/img26.jpg" alt="Hidden Gems Munnar" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Exploration</span>
+                        <h3 class="story-title">Beyond Munnar: 5 Hidden Gems You Must Explore</h3>
+                        <p class="story-excerpt">Skip the crowded viewpoints. Discover the secret waterfalls, ancient
+                            dolmens, and strawberry farms that only the locals know about.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 3 -->
+                <a href="stories/vattavada-vs-munnar.html" class="story-card reveal-up delay-2">
+                    <img src="images/optimized/img3.jpg" alt="Vattavada vs Munnar" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Comparison</span>
+                        <h3 class="story-title">Vattavada vs Munnar: Which One is Right for You?</h3>
+                        <p class="story-excerpt">Munnar is famous, but Vattavada is a secret. We compare the crowds, the
+                            views, and the vibe to help you decide.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 4 -->
+                <a href="stories/strawberry-farms-vattavada.html" class="story-card reveal-up">
+                    <img src="images/optimized/img4.jpg" alt="Strawberry Farms Vattavada" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Experience</span>
+                        <h3 class="story-title">Picking Strawberries in the Mist: A Vattavada Special</h3>
+                        <p class="story-excerpt">Walk through the terraced farms and pick fresh strawberries. A guide to
+                            the best farms and the right season.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 5 -->
+                <a href="stories/chilanthiyar-falls-trekking.html" class="story-card reveal-up delay-1">
+                    <img src="images/optimized/img5.jpg" alt="Chilanthiyar Falls Trekking" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Adventure</span>
+                        <h3 class="story-title">Chilanthiyar Falls: The Hidden Waterfall Trek</h3>
+                        <p class="story-excerpt">A guide to trekking down to the secluded Chilanthiyar Falls. What to
+                            pack, safety tips, and the best time to go.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 6 -->
+                <a href="stories/koviloor-village-guide.html" class="story-card reveal-up delay-2">
+                    <img src="images/optimized/img6.jpg" alt="Koviloor Village Guide" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Culture</span>
+                        <h3 class="story-title">Koviloor Village: Experiencing Rural Life in Kerala</h3>
+                        <p class="story-excerpt">Step back in time in the village of Koviloor. Explore the terraced
+                            farming, ancient customs, and warm hospitality.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 7 -->
+                <a href="stories/pazhathottam-view-point.html" class="story-card reveal-up">
+                    <img src="images/optimized/img7.jpg" alt="Pazhathottam View Point" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Viewpoint</span>
+                        <h3 class="story-title">Pazhathottam View Point: The Best Sunrise in Idukki</h3>
+                        <p class="story-excerpt">Wake up early for a sunrise that paints the sky. Directions, timing,
+                            and what to expect at Pazhathottam.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 8 -->
+                <a href="stories/winter-in-vattavada.html" class="story-card reveal-up delay-1">
+                    <img src="images/optimized/img8.jpg" alt="Winter in Vattavada" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Travel Tips</span>
+                        <h3 class="story-title">Winter in Vattavada: What to Pack for Single Digit Temperatures</h3>
+                        <p class="story-excerpt">It gets colder than you think! A packing list for surviving and
+                            enjoying the frosty mornings of Vattavada.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 9 -->
+                <a href="stories/winter-vegetable-market-vattavada.html" class="story-card reveal-up delay-2">
+                    <img src="images/optimized/img9.jpg" alt="Winter Vegetable Market" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Food & Culture</span>
+                        <h3 class="story-title">A Guide to the Winter Vegetable Market of Vattavada</h3>
+                        <p class="story-excerpt">Explore the vibrant market where fresh carrots, cabbages, and garlic
+                            are sold directly by the farmers.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 10 -->
+                <a href="stories/history-of-vattavada.html" class="story-card reveal-up">
+                    <img src="images/optimized/img10.jpg" alt="History of Vattavada" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">History</span>
+                        <h3 class="story-title">The History of Vattavada: From Ancient Tribes to Farming Hub</h3>
+                        <p class="story-excerpt">Uncover the fascinating history of this region, from its tribal roots
+                            to becoming the vegetable bowl of Kerala.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 11 -->
+                <a href="stories/top-5-trekking-trails-vattavada.html" class="story-card reveal-up delay-1">
+                    <img src="images/optimized/img11.jpg" alt="Top 5 Trekking Trails" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Adventure</span>
+                        <h3 class="story-title">Top 5 Trekking Trails in Vattavada for Beginners</h3>
+                        <p class="story-excerpt">You don't need to be a pro. Here are 5 scenic trails that are perfect
+                            for beginners and families.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 12 -->
+                <a href="stories/pampadum-shola-guide.html" class="story-card reveal-up delay-2">
+                    <img src="images/optimized/img12.jpg" alt="Pampadum Shola Guide" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Wildlife</span>
+                        <h3 class="story-title">Pampadum Shola National Park: A Wildlife Lover's Guide</h3>
+                        <p class="story-excerpt">Spot the Nilgiri Marten and exotic birds. A complete guide to visiting
+                            the smallest national park in Kerala.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 13 -->
+                <a href="stories/jeep-safari-vattavada.html" class="story-card reveal-up">
+                    <img src="images/optimized/img13.jpg" alt="Jeep Safari Vattavada" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Adventure</span>
+                        <h3 class="story-title">Jeep Safari in Vattavada: Off-Roading Through the Mist</h3>
+                        <p class="story-excerpt">Hold on tight! We take you through the rugged terrain and misty trails
+                            on a thrilling jeep safari.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 14 -->
+                <a href="stories/camping-vs-hotel-munnar.html" class="story-card reveal-up delay-1">
+                    <img src="images/optimized/img14.jpg" alt="Camping vs Hotel" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Comparison</span>
+                        <h3 class="story-title">Camping vs Hotel in Munnar: Why Glamping Wins</h3>
+                        <p class="story-excerpt">Why stay within four walls when you can sleep under the stars? We
+                            compare the experience of camping vs hotels.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 15 -->
+                <a href="stories/night-trekking-safety.html" class="story-card reveal-up delay-2">
+                    <img src="images/optimized/img15.jpg" alt="Night Trekking Safety" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Safety</span>
+                        <h3 class="story-title">Night Trekking in Vattavada: Is it Safe?</h3>
+                        <p class="story-excerpt">The forest comes alive at night. Safety tips, what to wear, and how to
+                            enjoy a night trek responsibly.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 16 -->
+                <a href="stories/mountain-biking-routes.html" class="story-card reveal-up">
+                    <img src="images/optimized/img16.jpg" alt="Mountain Biking Routes" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Adventure</span>
+                        <h3 class="story-title">Mountain Biking Routes in Vattavada for Thrill Seekers</h3>
+                        <p class="story-excerpt">Bring your bike or rent one. These trails offer the perfect mix of
+                            challenge and scenery for cyclists.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 17 -->
+                <a href="stories/bird-watching-checklist.html" class="story-card reveal-up delay-1">
+                    <img src="images/optimized/img17.jpg" alt="Bird Watching Checklist" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Wildlife</span>
+                        <h3 class="story-title">Bird Watching in Vattavada: A Checklist for Enthusiasts</h3>
+                        <p class="story-excerpt">From the Nilgiri Flycatcher to the Malabar Whistling Thrush. A
+                            checklist of birds to spot in the region.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 18 -->
+                <a href="stories/secret-cave-trek.html" class="story-card reveal-up delay-2">
+                    <img src="images/optimized/img18.jpg" alt="Secret Cave Trek" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Adventure</span>
+                        <h3 class="story-title">The Secret Cave Trek: An Unexplored Trail</h3>
+                        <p class="story-excerpt">Venture off the beaten path to discover a hidden cave with a view that
+                            will take your breath away.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 19 -->
+                <a href="stories/bonfire-night-games.html" class="story-card reveal-up">
+                    <img src="images/optimized/img19.jpg" alt="Bonfire Night Games" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Fun</span>
+                        <h3 class="story-title">5 Fun Games to Play Around the Bonfire</h3>
+                        <p class="story-excerpt">Keep the energy high and the laughter loud with these simple and fun
+                            games for your campfire night.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 20 -->
+                <a href="stories/solo-traveling-guide.html" class="story-card reveal-up delay-1">
+                    <img src="images/optimized/img20.jpg" alt="Solo Traveling Guide" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Travel Guide</span>
+                        <h3 class="story-title">Solo Traveling to Vattavada: A Complete Guide</h3>
+                        <p class="story-excerpt">Is Vattavada safe for solo travelers? Where to stay, how to get around,
+                            and how to meet fellow travelers.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 21 -->
+                <a href="stories/photography-guide-vattavada.html" class="story-card reveal-up delay-2">
+                    <img src="images/optimized/img21.jpg" alt="Photography Guide" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Photography</span>
+                        <h3 class="story-title">Photography Guide to Vattavada: Best Spots & Times</h3>
+                        <p class="story-excerpt">Capture the mist, the golden hour, and the vibrant landscapes. Tips for
+                            photographers visiting Vattavada.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 22 -->
+                <a href="stories/local-cuisine-vattavada.html" class="story-card reveal-up">
+                    <img src="images/optimized/img22.jpg" alt="Local Cuisine" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Food</span>
+                        <h3 class="story-title">The Local Cuisine of Vattavada: Must-Try Dishes</h3>
+                        <p class="story-excerpt">Taste the authentic flavors of the hills. From farm-fresh curries to
+                            traditional snacks.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 23 -->
+                <a href="stories/2-day-itinerary-vattavada.html" class="story-card reveal-up delay-1">
+                    <img src="images/optimized/img23.jpg" alt="2 Day Itinerary" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Itinerary</span>
+                        <h3 class="story-title">The Perfect 2-Day Itinerary for Vattavada</h3>
+                        <p class="story-excerpt">Maximize your weekend with this perfectly planned itinerary covering
+                            treks, farms, and relaxation.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 24 -->
+                <a href="stories/3-day-itinerary-munnar-vattavada.html" class="story-card reveal-up delay-2">
+                    <img src="images/optimized/img24.jpg" alt="3 Day Itinerary" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Itinerary</span>
+                        <h3 class="story-title">The Ultimate 3-Day Vattavada & Munnar Itinerary</h3>
+                        <p class="story-excerpt">Combine the best of both worlds. A 3-day plan to explore the tea
+                            gardens of Munnar and the farms of Vattavada.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 25 -->
+                <a href="stories/honeymoon-guide-vattavada.html" class="story-card reveal-up">
+                    <img src="images/optimized/img25.jpg" alt="Honeymoon Guide" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Romance</span>
+                        <h3 class="story-title">Honeymoon in a Tent: Romantic Ideas for Couples</h3>
+                        <p class="story-excerpt">Ditch the hotel suite for a private tent. Romantic ideas for couples
+                            looking for seclusion and nature.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 26 -->
+                <a href="stories/family-trip-guide.html" class="story-card reveal-up delay-1">
+                    <img src="images/optimized/img26.jpg" alt="Family Trip Guide" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Family</span>
+                        <h3 class="story-title">Family Trip to Vattavada: A Guide for Parents</h3>
+                        <p class="story-excerpt">Is Vattavada kid-friendly? Tips for traveling with children and keeping
+                            them entertained outdoors.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 27 -->
+                <a href="stories/corporate-offsite-guide.html" class="story-card reveal-up delay-2">
+                    <img src="images/optimized/img27.jpg" alt="Corporate Offsite Guide" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Corporate</span>
+                        <h3 class="story-title">Corporate Offsites: Team Building in the Hills</h3>
+                        <p class="story-excerpt">Boost team morale with an offsite in nature. Activities and facilities
+                            for corporate groups.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 28 -->
+                <a href="stories/digital-detox-guide.html" class="story-card reveal-up">
+                    <img src="images/optimized/img28.jpg" alt="Digital Detox Guide" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Wellness</span>
+                        <h3 class="story-title">Digital Detox: Why You Need to Unplug in Vattavada</h3>
+                        <p class="story-excerpt">Disconnect to reconnect. The benefits of a digital detox and how
+                            Vattavada is the perfect place for it.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 29 -->
+                <a href="stories/sustainable-travel-vattavada.html" class="story-card reveal-up delay-1">
+                    <img src="images/optimized/img29.jpg" alt="Sustainable Travel" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Eco-Travel</span>
+                        <h3 class="story-title">Sustainable Travel: How to be an Eco-Tourist in Vattavada</h3>
+                        <p class="story-excerpt">Travel responsibly. Tips on reducing your footprint and respecting the
+                            local environment.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 30 -->
+                <a href="stories/monsoon-packing-list.html" class="story-card reveal-up delay-2">
+                    <img src="images/optimized/img30.jpg" alt="Monsoon Packing List" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Travel Tips</span>
+                        <h3 class="story-title">Packing List for Monsoon in Vattavada</h3>
+                        <p class="story-excerpt">The rains are beautiful but tricky. Here is what you need to pack to
+                            stay dry and comfortable.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 31 -->
+                <a href="stories/kochi-to-vattavada-road-trip.html" class="story-card reveal-up">
+                    <img src="images/optimized/img31.jpg" alt="Kochi to Vattavada" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Road Trip</span>
+                        <h3 class="story-title">Kochi to Vattavada Road Trip: A Scenic Drive</h3>
+                        <p class="story-excerpt">Route map, pitstops, and road conditions for the drive from Kochi to
+                            Vattavada.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 32 -->
+                <a href="stories/bangalore-to-munnar-drive.html" class="story-card reveal-up delay-1">
+                    <img src="images/optimized/img32.jpg" alt="Bangalore to Munnar" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Road Trip</span>
+                        <h3 class="story-title">Bangalore to Munnar Drive: The Ultimate Weekend Escape</h3>
+                        <p class="story-excerpt">A long drive worth every mile. Best route, breakfast stops, and timing
+                            for Bangaloreans.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 33 -->
+                <a href="stories/madurai-to-vattavada-route.html" class="story-card reveal-up delay-2">
+                    <img src="images/optimized/img33.jpg" alt="Madurai to Vattavada" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Road Trip</span>
+                        <h3 class="story-title">Madurai to Vattavada: The Less Taken Route</h3>
+                        <p class="story-excerpt">Driving from Tamil Nadu? Discover the scenic route from Madurai via
+                            Theni.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 34 -->
+                <a href="stories/public-transport-guide.html" class="story-card reveal-up">
+                    <img src="images/optimized/img34.jpg" alt="Public Transport Guide" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Travel Guide</span>
+                        <h3 class="story-title">Reaching Vattavada by Bus: A Public Transport Guide</h3>
+                        <p class="story-excerpt">Budget traveling? Here is how to reach Vattavada using KSRTC buses from
+                            Munnar.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 35 -->
+                <a href="stories/best-pitstops-munnar.html" class="story-card reveal-up delay-1">
+                    <img src="images/optimized/img35.jpg" alt="Best Pitstops Munnar" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Travel Tips</span>
+                        <h3 class="story-title">Best Pitstops on the Way to Munnar</h3>
+                        <p class="story-excerpt">Don't just drive through. Stop at these waterfalls and viewpoints on
+                            your way up.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 36 -->
+                <a href="stories/top-station-sunrise.html" class="story-card reveal-up delay-2">
+                    <img src="images/optimized/img36.jpg" alt="Top Station Sunrise" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Experience</span>
+                        <h3 class="story-title">Top Station Sunrise: Is it Worth the Hype?</h3>
+                        <p class="story-excerpt">The famous sunrise spot near Vattavada. We tell you the best time to go
+                            and where to stand.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 37 -->
+                <a href="stories/marayoor-dolmens.html" class="story-card reveal-up">
+                    <img src="images/optimized/img37.jpg" alt="Marayoor Dolmens" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">History</span>
+                        <h3 class="story-title">Marayoor Dolmens: Ancient Stone Age Sites Nearby</h3>
+                        <p class="story-excerpt">Visit the prehistoric Muniyaras (Dolmens) in Marayoor, just a short
+                            drive away.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 38 -->
+                <a href="stories/kanthalloor-vs-vattavada.html" class="story-card reveal-up delay-1">
+                    <img src="images/optimized/img38.jpg" alt="Kanthalloor vs Vattavada" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Comparison</span>
+                        <h3 class="story-title">Kanthalloor vs Vattavada: Twin Villages Compared</h3>
+                        <p class="story-excerpt">They are neighbors, but different. Which village offers the best fruit
+                            farms and views?</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 39 -->
+                <a href="stories/eravikulam-national-park-guide.html" class="story-card reveal-up delay-2">
+                    <img src="images/optimized/img39.jpg" alt="Eravikulam National Park" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Wildlife</span>
+                        <h3 class="story-title">Eravikulam National Park: Home of the Nilgiri Tahr</h3>
+                        <p class="story-excerpt">Everything you need to know about visiting the home of the endangered
+                            Nilgiri Tahr.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 40 -->
+                <a href="stories/kundala-dam-boating.html" class="story-card reveal-up">
+                    <img src="images/optimized/img40.jpg" alt="Kundala Dam Boating" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Activity</span>
+                        <h3 class="story-title">Boating at Kundala Dam: A Romantic Experience</h3>
+                        <p class="story-excerpt">Paddle through the misty waters of Kundala Dam. A perfect activity for
+                            couples.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 41 -->
+                <a href="stories/bachelor-party-vattavada.html" class="story-card reveal-up delay-1">
+                    <img src="images/optimized/img41.jpg" alt="Bachelor Party Vattavada" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Party</span>
+                        <h3 class="story-title">Planning a Bachelor Party in Vattavada</h3>
+                        <p class="story-excerpt">Celebrate responsibly in the wild. Ideas for a memorable bachelor party
+                            in the hills.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 42 -->
+                <a href="stories/workation-guide.html" class="story-card reveal-up delay-2">
+                    <img src="images/optimized/img42.jpg" alt="Workation Guide" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Workation</span>
+                        <h3 class="story-title">Work from Mountains: Vattavada Workation Guide</h3>
+                        <p class="story-excerpt">Good wifi? Power backup? We answer all your questions about working
+                            remotely from Vattavada.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 43 -->
+                <a href="stories/star-gazing-guide.html" class="story-card reveal-up">
+                    <img src="images/optimized/img43.jpg" alt="Star Gazing Guide" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Astronomy</span>
+                        <h3 class="story-title">Star Gazing in Vattavada: A Guide to the Night Sky</h3>
+                        <p class="story-excerpt">With zero light pollution, Vattavada is a stargazer's paradise. What to
+                            look for in the night sky.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 44 -->
+                <a href="stories/strawberry-recipes.html" class="story-card reveal-up delay-1">
+                    <img src="images/optimized/img44.jpg" alt="Strawberry Recipes" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Food</span>
+                        <h3 class="story-title">5 Delicious Strawberry Recipes from Vattavada Locals</h3>
+                        <p class="story-excerpt">Bought too many strawberries? Here are some local recipes to try at
+                            home.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 45 -->
+                <a href="stories/wellness-retreats.html" class="story-card reveal-up delay-2">
+                    <img src="images/optimized/img45.jpg" alt="Wellness Retreats" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Wellness</span>
+                        <h3 class="story-title">Wellness Retreats: Yoga and Meditation in Nature</h3>
+                        <p class="story-excerpt">Find your inner peace. The best spots for yoga and meditation in the
+                            Vattavada hills.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 46 -->
+                <a href="stories/solo-female-travelers-guide.html" class="story-card reveal-up">
+                    <img src="images/optimized/img46.jpg" alt="Solo Female Travelers Guide" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Safety</span>
+                        <h3 class="story-title">Solo Female Travelers Guide to Vattavada</h3>
+                        <p class="story-excerpt">Safety tips, accommodation advice, and encouragement for women
+                            traveling solo to Vattavada.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 47 -->
+                <a href="stories/flora-of-shola-forests.html" class="story-card reveal-up delay-1">
+                    <img src="images/optimized/img47.jpg" alt="Flora of Shola Forests" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Nature</span>
+                        <h3 class="story-title">Flora of the Shola Forests: Unique Plants to Spot</h3>
+                        <p class="story-excerpt">Discover the unique biodiversity of the Shola forests. Rare orchids,
+                            mosses, and trees.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 48 -->
+                <a href="stories/plastic-free-vattavada.html" class="story-card reveal-up delay-2">
+                    <img src="images/optimized/img48.jpg" alt="Plastic Free Vattavada" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Eco-Conscious</span>
+                        <h3 class="story-title">Why Vattavada is Going Plastic-Free</h3>
+                        <p class="story-excerpt">Join the movement. How the local community is fighting to keep
+                            Vattavada plastic-free.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 49 -->
+                <a href="stories/neelakurinji-season.html" class="story-card reveal-up">
+                    <img src="images/optimized/img49.jpg" alt="Neelakurinji Season" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Nature</span>
+                        <h3 class="story-title">Neelakurinji Season: When the Hills Turn Blue</h3>
+                        <p class="story-excerpt">The phenomenon that happens once in 12 years. Everything you need to
+                            know about the Neelakurinji bloom.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+                <!-- Story 50 -->
+                <a href="stories/why-gypsys-paradiso-is-best.html" class="story-card reveal-up delay-1">
+                    <img src="images/optimized/img50.jpg" alt="Why Gypsys Paradiso is Best" class="story-img">
+                    <div class="story-content">
+                        <span class="story-date">Review</span>
+                        <h3 class="story-title">Why Gypsys Paradiso is the Best Campsite in Munnar</h3>
+                        <p class="story-excerpt">We might be biased, but our guests aren't. Here is why travelers rate
+                            us as the #1 campsite in Vattavada.</p>
+                        <div class="read-more">Read Article <span>→</span></div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer class="site-footer">
         <div class="container footer-content">
             <h2 style="color: var(--gold)">Ready to <br><em>write your story?</em></h2>
