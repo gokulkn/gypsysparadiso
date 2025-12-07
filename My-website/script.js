@@ -243,23 +243,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 10. Lazy Load Instagram Widget (Performance Optimization)
-  const instaContainer = document.getElementById('insta-feed-container');
-  if (instaContainer) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Load Elfsight Script
-          if (!document.querySelector('script[src*="elfsight"]')) {
-            const script = document.createElement('script');
-            script.src = "https://static.elfsight.com/platform/platform.js";
-            script.async = true;
-            document.body.appendChild(script);
-            console.log("Instagram Widget Lazy Loaded");
-          }
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: "100px" }); // Start loading when 100px away
-    observer.observe(instaContainer);
-  }
 });
