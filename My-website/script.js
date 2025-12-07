@@ -75,6 +75,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // Attach Listeners Immediately
   const waLinks = document.querySelectorAll('a[href*="wa.me"]');
   waLinks.forEach(link => {
+    // Dynamic Message Injection
+    try {
+      const pageTitle = document.title;
+      const message = `Hi, I was reading about ${pageTitle} and I'd like to make a booking.`;
+
+      // Use URL object to handle parameters cleanly
+      const url = new URL(link.href);
+      url.searchParams.set('text', message);
+      link.href = url.toString();
+    } catch (err) {
+      console.log("Could not auto-update WA link", err);
+    }
+
     link.addEventListener('click', () => trackClick('WhatsApp'));
   });
 
