@@ -29,6 +29,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // --- GOOGLE ANALYTICS (Global Injection) ---
+  // This ensures tracking works on Home + All 50 Stories automatically.
+  const GA_ID = "G-1PXQ0HG9FC";
+
+  if (!document.querySelector(`script[src*="${GA_ID}"]`)) {
+    // 1. Load the Script
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    document.head.appendChild(script);
+
+    // 2. Initialize DataLayer
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+    console.log("GA4 Initialized:", GA_ID);
+  }
+
   // 2. Reveal Animations
   // 2. Reveal Animations (Safety Check)
   // --- CLICK TRACKING SYSTEM ---
