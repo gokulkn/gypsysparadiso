@@ -3018,4 +3018,12 @@ a[href^="tel:"] {
     }
 }
 
+/* Fix for Story Content Visibility */
+.story-content p, 
+.story-content .body-text, 
+.story-content li,
+.story-content .lead {
+    color: rgba(255, 255, 255, 0.9);
+}
+
 
