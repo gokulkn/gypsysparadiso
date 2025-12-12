@@ -1,4 +1,4 @@
-/* --- 1. DESIGN TOKENS --- */
+ï»¿/* --- 1. DESIGN TOKENS --- */
 :root {
   --ink: #0D1410;
   /* Deep Green-Black */
@@ -1682,7 +1682,7 @@ em {
 
 /* Remove the radial gradient glow if it causes "fade" issues, or keep it very subtle */
 .faq-section::before {
-  content: '';
+  content: '\2022';
   position: absolute;
   top: 0;
   left: 0;
@@ -1719,7 +1719,7 @@ em {
 }
 
 .bento-card::after {
-  content: '';
+  content: '\2022';
   position: absolute;
   top: 0;
   left: 0;
@@ -2534,7 +2534,7 @@ a[href^="tel:"] {
 
 /* Inner Gold Ring */
 .google-seal::after {
-  content: '';
+  content: '\2022';
   position: absolute;
   width: 64%;
   /* Reduced to make room for text */
@@ -2979,7 +2979,7 @@ a[href^="tel:"] {
 }
 
 .body-list li::before {
-  content: '•';
+  content: '\2022';
   color: var(--gold);
   position: absolute;
   left: 0;
@@ -3017,4 +3017,5 @@ a[href^="tel:"] {
         font-size: 1.05rem;
     }
 }
+
 
