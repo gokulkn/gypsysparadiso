@@ -64,9 +64,18 @@ document.addEventListener('DOMContentLoaded', () => {
       page: window.location.pathname
     };
 
-    // 3. Send to Google Sheet (Using GET for reliability)
+    // 3. GA4 Tracking (NEW: Fixes "0 Key Events")
+    if (typeof gtag === 'function') {
+      gtag('event', 'generate_lead', {
+        currency: "INR",
+        value: 100, // Arbitrary value to score leads
+        item_name: platform // "WhatsApp" or "Instagram"
+      });
+      console.log("GA4 Event Sent: generate_lead");
+    }
+
+    // 4. Send to Google Sheet (Existing Logic)
     if (TRACKING_URL && TRACKING_URL !== "YOUR_GOOGLE_SCRIPT_URL_HERE") {
-      // Construct URL with parameters
       const params = new URLSearchParams({
         platform: platform,
         device: isMobile,
@@ -74,13 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       const finalUrl = `${TRACKING_URL}?${params.toString()}`;
-
-      // DEBUG: Remove this alert after testing
-      // alert("Debug: Sending to " + finalUrl);
-
-      // 3. Send to Google Sheet (Pixel Method - 100% Reliable)
-      // We creates an invisible image. The browser tries to load it, 
-      // which sends the GET request to our script.
+      
+      // Pixel Method
       const pixel = new Image();
       pixel.src = finalUrl;
 
