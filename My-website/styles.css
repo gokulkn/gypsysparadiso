@@ -34,6 +34,7 @@
 }
 
 html {
+  /* Prevent Faux Styles on iOS */
   /* scroll-behavior: smooth;  <-- Removed for Lenis compatibility */
   font-size: 16px;
   height: 100%;
@@ -44,6 +45,7 @@ body {
   color: var(--ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  /* Apple crispness */
   overflow-x: hidden;
   overscroll-behavior: none;
   /* App-like bounce prevention */
@@ -64,9 +66,33 @@ h2,
 h3 {
   font-family: var(--font-serif);
   font-weight: 400;
+  /* SemiBold Display */
   line-height: 1.1;
   color: var(--ink);
-  /* Default dark */
+}
+
+/* Structurally Sound H2 */
+h2 {
+  font-style: normal;
+  letter-spacing: -1px;
+  /* Serifs need tightening */
+  text-transform: none;
+  /* Keep it natural case */
+}
+
+/* Elegant H3 */
+h3 {
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+i,
+em {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--gold);
 }
 
 /* Philosophy Section Specifics */
@@ -88,13 +114,8 @@ h3 {
 p {
   line-height: 1.7;
   font-weight: 300;
-  color: #444;
-}
-
-em {
-  font-style: italic;
-  font-weight: 400;
-  color: var(--gold);
+  color: rgba(60, 60, 60, 1);
+  /* Darker grey for better readability */
 }
 
 /* --- 3. NAV BAR --- */
@@ -190,9 +211,8 @@ em {
 
 .hero-title {
   font-family: var(--font-serif);
-  /* Restored font */
   font-size: clamp(3.5rem, 8vw, 7rem);
-  /* Optimized size */
+  font-weight: 400;
   margin-bottom: 20px;
   color: #FFFFFF;
   text-shadow: 0 4px 30px rgba(0, 0, 0, 1);
@@ -215,15 +235,18 @@ em {
 
 .hero-sub p {
   font-family: var(--font-serif);
+  /* Unified */
   font-size: clamp(1.2rem, 2.5vw, 2rem);
+  /* Large Serif Body */
   font-weight: 300;
-  /* Light weight */
   font-style: italic;
   color: #F0F0F0;
+  /* Apple's off-white */
   max-width: 600px;
   margin: 0 auto;
   text-shadow: 0 2px 15px rgba(0, 0, 0, 1);
   letter-spacing: 0.5px;
+  line-height: 1.5;
 }
 
 .hero-btn {
@@ -710,8 +733,12 @@ em {
 .sub-head {
   color: var(--gold);
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 0.8rem;
+  letter-spacing: 3px;
+  /* Enhanced tracking for "luxury" sans */
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 10px;
 }
 
 .grid-triad {
@@ -738,10 +765,13 @@ em {
   font-size: 1.8rem;
   margin-bottom: 10px;
   color: white;
+  font-style: italic;
+  font-weight: 400;
 }
 
 .card p {
-  color: #888;
+  color: rgba(255, 255, 255, 0.85);
+  /* Improved contrast */
   font-size: 1rem;
 }
 
@@ -1734,7 +1764,8 @@ em {
   font-size: 1.5rem;
   margin-bottom: 10px;
   color: #FFFFFF !important;
-  /* Force White for visibility */
+  font-style: italic;
+  font-weight: 400;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
