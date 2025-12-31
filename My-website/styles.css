@@ -103,8 +103,8 @@ em {
 
 .philosophy .lead,
 .philosophy .body-text {
-  color: rgba(244, 241, 237, 0.8);
-  /* Light text with slight transparency */
+  color: rgba(244, 241, 237, 0.95);
+  /* Improved contrast for readability */
 }
 
 .philosophy .location-byline {
@@ -642,13 +642,14 @@ p {
 }
 
 .glass-card {
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 50px;
   border-radius: 8px;
   color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .glass-card .label {
@@ -770,9 +771,10 @@ p {
 }
 
 .card p {
-  color: rgba(255, 255, 255, 0.85);
-  /* Improved contrast */
+  color: rgba(255, 255, 255, 0.95);
+  /* Improved contrast: Nearly opaque off-white */
   font-size: 1rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 /* Hide Swipe Hint on Desktop */
@@ -1462,6 +1464,29 @@ p {
   .nav-bar {
     padding: 20px;
   }
+
+  /* --- GLOBAL MOBILE SAFETY --- */
+  .grid-split,
+  .panoramic-content {
+    grid-template-columns: 1fr !important;
+    gap: 40px;
+  }
+
+  .text-col h2,
+  .section h2 {
+    font-size: 2.5rem !important;
+    /* Stacked headers */
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 10vw, 4rem) !important;
+    /* Prevent overflow */
+  }
+
+  .img-col img {
+    height: 400px;
+    /* Reduce height on mobile */
+  }
 }
 
 /* --- ANIMATIONS --- */
@@ -1911,6 +1936,33 @@ p {
   padding: 40px 20px;
   scrollbar-width: none;
   scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 900px) {
+  .pack-list {
+    padding: 20px;
+    gap: 15px;
+    scroll-padding-left: 20px;
+  }
+
+  .pack-item {
+    min-width: 140px;
+    /* Smaller width for mobile */
+    padding: 25px 15px;
+  }
+
+  /* Resize Stamp Icons for Mobile */
+  .pack-icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10px;
+  }
+
+  .journey-section h2 {
+    font-size: 2rem !important;
+    /* Scale down header */
+  }
 }
 
 .pack-item {
@@ -1922,37 +1974,24 @@ p {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   scroll-snap-align: center;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  color: var(--ink);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
 }
 
-.pack-item:nth-child(1) {
-  background: #e3f2fd;
+/* Dark Glass Theme for Pack Items (Replaces Pastels) */
+.pack-item:nth-child(n) {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-/* Blue */
-.pack-item:nth-child(2) {
-  background: #fff3e0;
+.pack-item:nth-child(n):hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--gold);
 }
-
-/* Orange */
-.pack-item:nth-child(3) {
-  background: #fce4ec;
-}
-
-/* Pink */
-.pack-item:nth-child(4) {
-  background: #e8f5e9;
-}
-
-/* Green */
-.pack-item:nth-child(5) {
-  background: #f3e5f5;
-}
-
-/* Purple */
 
 .pack-item:hover {
   transform: scale(1.15) translateY(-10px);
@@ -1960,37 +1999,62 @@ p {
   z-index: 10;
 }
 
+/* --- OPTION 1: THE GOLDEN FILAMENT --- */
 .pack-icon {
   font-size: 3rem;
   margin-bottom: 15px;
   display: block;
-  transition: transform 0.4s;
+  transition: all 0.4s ease;
+  color: var(--gold);
+
+  /* The Filament Glow */
+  filter: drop-shadow(0 0 2px rgba(192, 160, 98, 0.6));
 }
 
 .pack-item:hover .pack-icon {
-  transform: scale(1.3) rotate(10deg);
-  animation: jelly 0.6s;
+  /* Power Up Effect */
+  filter: drop-shadow(0 0 8px rgba(192, 160, 98, 1)) drop-shadow(0 0 15px rgba(255, 215, 0, 0.4));
+  transform: scale(1.05);
+  animation: flicker 2s infinite alternate;
+  color: #FFD700;
+  /* Brighter gold when "on" */
 }
 
-@keyframes jelly {
+@keyframes flicker {
+  0% {
+    opacity: 1;
+  }
 
-  0%,
+  3% {
+    opacity: 0.8;
+  }
+
+  6% {
+    opacity: 1;
+  }
+
+  7% {
+    opacity: 0.9;
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  9% {
+    opacity: 1;
+  }
+
+  10% {
+    opacity: 0.95;
+  }
+
   100% {
-    transform: scale(1.3) rotate(10deg);
-  }
-
-  25% {
-    transform: scale(0.9, 1.4) rotate(5deg);
-  }
-
-  50% {
-    transform: scale(1.4, 0.9) rotate(15deg);
-  }
-
-  75% {
-    transform: scale(0.95, 1.35) rotate(8deg);
+    opacity: 1;
   }
 }
+
+/* Remove old jelly animation */
 
 /* --- MOBILE FLOATING ACTION (Updated) --- */
 .mobile-float {
@@ -2052,13 +2116,14 @@ p {
   /* --- SIMPLIFIED ARROW LAYOUT (MOBILE) --- */
   .journey-timeline {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    /* Vertical Stepper layout as requested */
     align-items: center;
-    gap: 30px;
-    /* Increased from 15px to reduce congestion */
+    gap: 20px;
     margin-top: 30px;
     padding-left: 0;
-    overflow-x: auto;
+    overflow-x: visible;
+    /* Remove scroll */
     padding-bottom: 20px;
   }
 
@@ -2075,10 +2140,10 @@ p {
   /* Reset Arrow for Horizontal */
   /* Reset Arrow for Horizontal */
   .journey-arrow {
-    transform: rotate(0deg);
-    margin: 0 5px;
-    /* Reduce margin */
-    animation: pulseArrowRight 2s infinite;
+    transform: rotate(90deg);
+    margin: 10px 0;
+    /* Spacing for vertical layout */
+    animation: pulseArrowDown 2s infinite;
     display: flex !important;
     align-items: center;
     justify-content: center;
@@ -2093,16 +2158,16 @@ p {
     /* Vertically center */
   }
 
-  @keyframes pulseArrowRight {
+  @keyframes pulseArrowDown {
 
     0%,
     100% {
-      transform: translateX(0);
+      transform: rotate(90deg) translateY(0);
       opacity: 0.8;
     }
 
     50% {
-      transform: translateX(5px);
+      transform: rotate(90deg) translateY(5px);
       opacity: 1;
     }
   }
@@ -2191,7 +2256,22 @@ p {
   margin-top: 2px;
   /* Fixed overlap */
   letter-spacing: 0.5px;
+  /* Fixed overlap */
+  letter-spacing: 0.5px;
   text-shadow: none;
+}
+
+/* --- SOCIAL WIDGET CLEANUP --- */
+/* Attempt to clean up Elfsight generic classes if accessible */
+.eapps-instagram-feed-title,
+.eapps-instagram-feed-posts-item-meta,
+.eapps-widget-toolbar {
+  display: none !important;
+}
+
+/* Hide potential red bars or footer links */
+a[href*="elfsight.com"] {
+  display: none !important;
 }
 
 .brand {
