@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Registration | Gypsys Paradiso</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        paradiso: {
+                            bg: '#0F172A', // Slate 900
+                            gold: '#D4AF37',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0F172A; /* Fallback */
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(212, 175, 55, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .spinner {
+            border: 3px solid rgba(255,255,255,0.1);
+            border-left-color: #D4AF37;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-md glass-card rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden" id="app-container">
+        <!-- Decoration -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-paradiso-gold to-transparent opacity-50"></div>
+
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-12 h-12 rounded-full border border-yellow-500/30 bg-yellow-500/10 mb-3 text-2xl">
+                ⛺
+            </div>
+            <h1 class="font-serif text-3xl text-white mb-1">Guest Registration</h1>
+            <p class="text-xs text-slate-400 uppercase tracking-widest">Gypsys Paradiso</p>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading-view" class="hidden flex-col items-center justify-center py-10">
+            <div class="spinner mb-4"></div>
+            <p class="text-sm text-slate-400 animate-pulse">Verifying Booking...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-view" class="hidden text-center py-6">
+            <div class="text-red-400 text-5xl mb-4">⚠️</div>
+            <h3 class="text-xl font-serif text-white mb-2">Invalid Link</h3>
+            <p class="text-sm text-slate-400">We couldn't find your booking details.<br>Please contact the property.</p>
+        </div>
+
+        <!-- Success State -->
+        <div id="success-view" class="hidden text-center py-8">
+            <div class="text-green-400 text-6xl mb-4">✅</div>
+            <h3 class="text-2xl font-serif text-white mb-2">All Set!</h3>
+            <p class="text-sm text-slate-400 mb-6">Your IDs have been securely uploaded.<br>We look forward to hosting you.</p>
+            <a href="https://gypsysparadiso.in" class="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-full text-sm font-medium transition-colors">Return to Website</a>
+        </div>
+
+        <!-- Form View -->
+        <form id="registration-form" class="space-y-6 hidden">
+            <!-- Guest Info (Read Only) -->
+            <div class="bg-white/5 rounded-xl p-4 border border-white/5">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-xs text-slate-500 uppercase">Guest Name</span>
+                    <span class="text-xs text-yellow-500 bg-yellow-500/10 px-2 py-0.5 rounded" id="booking-status">CONFIRMED</span>
+                </div>
+                <div class="font-serif text-xl text-white" id="guest-name">Loading...</div>
+                <div class="text-sm text-slate-400 mt-1" id="stay-dates">...</div>
+            </div>
+
+            <!-- ID Upload Section -->
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Upload ID Proofs</label>
+                <div class="relative group">
+                    <input type="file" id="id-files" multiple accept="image/*,.pdf" 
+                        class="block w-full text-sm text-slate-400
+                        file:mr-4 file:py-3 file:px-4
+                        file:rounded-full file:border-0
+                        file:text-xs file:font-semibold
+                        file:bg-yellow-500 file:text-slate-900
+                        file:cursor-pointer hover:file:bg-yellow-400
+                        border border-white/10 rounded-xl bg-black/20 p-2 cursor-pointer transition-colors focus:outline-none focus:border-yellow-500/50"
+                    />
+                </div>
+                <p class="text-[10px] text-slate-500 mt-2">
+                    * Accepted formats: JPG, PNG, PDF. <br>
+                    * Please upload IDs for all adult guests.
+                </p>
+                <!-- Preview Area -->
+                <div id="file-preview" class="grid grid-cols-4 gap-2 mt-4"></div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" id="submit-btn" class="w-full py-4 bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold uppercase tracking-wider rounded-xl shadow-lg shadow-yellow-900/20 hover:shadow-yellow-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                Submit Registration
+            </button>
+        </form>
+
+    </div>
+
+    <!-- FIREBASE & LOGIC -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, getDoc, updateDoc, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCrW-ZPADSqM7spfNo7LRiorAjLXxTnaOQ",
+            authDomain: "paradiso-manager.firebaseapp.com",
+            projectId: "paradiso-manager",
+            storageBucket: "paradiso-manager.firebasestorage.app",
+            messagingSenderId: "732773359834",
+            appId: "1:732773359834:web:08d308d3bedee616b305e3"
+        };
+
+        // Init Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+
+        // UI Elements
+        const loadingView = document.getElementById('loading-view');
+        const errorView = document.getElementById('error-view');
+        const successView = document.getElementById('success-view');
+        const formView = document.getElementById('registration-form');
+        const guestNameEl = document.getElementById('guest-name');
+        const stayDatesEl = document.getElementById('stay-dates');
+        const submitBtn = document.getElementById('submit-btn');
+        const fileInput = document.getElementById('id-files');
+        const previewArea = document.getElementById('file-preview');
+
+        // Logic
+        let currentBookingId = null;
+        let selectedFiles = [];
+
+        // 1. Parse URL Params
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookingId = urlParams.get('id');
+
+        async function init() {
+            if (!bookingId) {
+                showError();
+                return;
+            }
+
+            currentBookingId = bookingId;
+            showLoading(true);
+
+            try {
+                // 2. Fetch Booking Data
+                const docRef = doc(db, "bookings", bookingId);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    displayBooking(data);
+                    showLoading(false);
+                    formView.classList.remove('hidden');
+                } else {
+                    console.error("No such document!");
+                    showError();
+                }
+            } catch (e) {
+                console.error("Error fetching booking:", e);
+                showError();
+            }
+        }
+
+        function displayBooking(data) {
+            guestNameEl.textContent = data.guestName || "Guest";
+            const start = new Date(data.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            const end = new Date(data.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            stayDatesEl.textContent = `${start} - ${end}`;
+        }
+
+        function showLoading(show) {
+            if(show) {
+                loadingView.classList.replace('hidden', 'flex');
+                formView.classList.add('hidden');
+            } else {
+                loadingView.classList.replace('flex', 'hidden');
+            }
+        }
+
+        function showError() {
+            loadingView.classList.replace('flex', 'hidden');
+            formView.classList.add('hidden');
+            errorView.classList.remove('hidden');
+        }
+
+        // File Preview Logic
+        fileInput.addEventListener('change', (e) => {
+            selectedFiles = Array.from(e.target.files);
+            previewArea.innerHTML = ''; // Clear
+
+            selectedFiles.forEach(file => {
+                const div = document.createElement('div');
+                div.className = 'aspect-square rounded-lg bg-white/10 overflow-hidden relative border border-white/10';
+                
+                if (file.type.startsWith('image/')) {
+                    const img = document.createElement('img');
+                    img.src = URL.createObjectURL(file);
+                    img.className = 'w-full h-full object-cover opacity-70';
+                    div.appendChild(img);
+                } else {
+                    div.innerHTML = '<span class="text-xs flex items-center justify-center h-full text-zinc-400">PDF</span>';
+                }
+                previewArea.appendChild(div);
+            });
+        });
+
+        // Submit Logic
+        formView.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (selectedFiles.length === 0) {
+                alert("Please select at least one ID proof.");
+                return;
+            }
+
+            // Disable UI
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Uploading (0%)...";
+
+            try {
+                const uploadPromises = selectedFiles.map(async (file, index) => {
+                    const ext = file.name.split('.').pop();
+                    const fileName = `registrations/${currentBookingId}/${Date.now()}_${index}.${ext}`;
+                    const storageRef = ref(storage, fileName);
+                    
+                    const snapshot = await uploadBytes(storageRef, file);
+                    const downloadURL = await getDownloadURL(snapshot.ref);
+                    
+                    // Simple progress update (rough)
+                    submitBtn.textContent = `Uploading...`;
+                    
+                    return { url: downloadURL, path: fileName, name: file.name };
+                });
+
+                const uploadedFiles = await Promise.all(uploadPromises);
+
+                // 3. Save to Firestore (Registrations Collection)
+                await addDoc(collection(db, "registrations"), {
+                    bookingId: currentBookingId,
+                    files: uploadedFiles,
+                    submittedAt: serverTimestamp(),
+                    userAgent: navigator.userAgent
+                });
+
+                // 4. Update Booking Status -> 'completed'
+                const bookingRef = doc(db, "bookings", currentBookingId);
+                await updateDoc(bookingRef, {
+                    registrationStatus: 'completed',
+                    // Optional: 'idVerified' is false by default until staff checks it
+                });
+
+                // Success!
+                formView.classList.add('hidden');
+                successView.classList.remove('hidden');
+
+            } catch (err) {
+                console.error("Upload failed", err);
+                alert("Upload failed. Please try again.");
+                submitBtn.disabled = false;
+                submitBtn.textContent = "SUBMIT REGISTRATION";
+            }
+        });
+
+        // Start
+        init();
+
+    </script>
+</body>
+</html>
