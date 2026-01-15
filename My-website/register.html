@@ -1,58 +1,221 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <meta name="theme-color" content="#050505" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Guest Registration - Gypsys Paradiso</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-        rel="stylesheet">
-
-    <!-- Tailwind CSS CDN -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Registration | Gypsys Paradiso</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        gold: {
-                            400: '#E5C158',
-                            500: '#D4AF37',
-                            600: '#B59428',
-                        },
-                        zinc: {
-                            850: '#1f1f22',
-                            950: '#09090b',
-                        },
                         paradiso: {
-                            bg: '#050505',
+                            bg: '#0F172A',
+                            gold: '#D4AF37',
                         }
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
                         serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background-color: #0F172A;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(212, 175, 55, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
 
-    <!-- Firebase SDK -->
+        .glass-card {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+
+        .step-content {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #D4AF37;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        canvas {
+            touch-action: none;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-md glass-card rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden"
+        id="app-container">
+        <!-- Progress Bar -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-gray-800">
+            <div id="progress" class="progress-bar h-full bg-gradient-to-r from-yellow-600 to-yellow-500"
+                style="width: 0%"></div>
+        </div>
+
+        <!-- Header -->
+        <div class="text-center mb-8 mt-4">
+            <div
+                class="inline-flex items-center justify-center w-12 h-12 rounded-full border border-yellow-500/30 bg-yellow-500/10 mb-3 text-2xl">
+                ⛺
+            </div>
+            <h1 class="font-serif text-3xl text-white mb-1">Guest Registration</h1>
+            <p class="text-xs text-slate-400 uppercase tracking-widest">Gypsys Paradiso</p>
+        </div>
+
+        <!-- Step 0: Intro -->
+        <div id="step-0" class="step-content">
+            <div class="text-center py-8">
+                <span class="text-yellow-500 text-xs font-bold uppercase tracking-[0.3em] mb-4 block">GYPSYS
+                    PARADISO</span>
+                <h2 class="text-4xl font-serif text-white mb-6 leading-tight">Unlock Your <br><span
+                        class="text-slate-500">Adventure.</span></h2>
+                <p class="text-slate-400 text-lg mb-12">Welcome. Let's get you checked in so you can head straight to
+                    the campfire.</p>
+                <button onclick="nextStep()"
+                    class="w-full py-4 bg-white text-black font-bold uppercase tracking-widest rounded-xl hover:bg-slate-200 transition-colors">
+                    Start Check-In
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 1: About You -->
+        <div id="step-1" class="step-content hidden">
+            <h2 class="text-2xl font-serif text-white mb-6">About You</h2>
+            <div class="space-y-4">
+                <input id="fullName" type="text" placeholder="Full Name"
+                    class="w-full bg-slate-900/50 border border-slate-700 p-4 rounded-xl text-white outline-none focus:border-yellow-500 transition-colors">
+                <input id="address" type="text" placeholder="City / Address"
+                    class="w-full bg-slate-900/50 border border-slate-700 p-4 rounded-xl text-white outline-none focus:border-yellow-500 transition-colors">
+                <input id="email" type="email" placeholder="Email Address"
+                    class="w-full bg-slate-900/50 border border-slate-700 p-4 rounded-xl text-white outline-none focus:border-yellow-500 transition-colors">
+                <input id="idNumber" type="text" placeholder="Aadhaar / ID Number"
+                    class="w-full bg-slate-900/50 border border-slate-700 p-4 rounded-xl text-white outline-none focus:border-yellow-500 transition-colors">
+            </div>
+        </div>
+
+        <!-- Step 2: The Wolfpack -->
+        <div id="step-2" class="step-content hidden">
+            <h2 class="text-2xl font-serif text-white mb-2">The Wolfpack</h2>
+            <p class="text-slate-500 text-sm mb-6">Who else is joining the adventure?</p>
+            <div id="guestList" class="space-y-3 mb-6"></div>
+            <div class="p-4 border border-dashed border-slate-700 rounded-xl">
+                <input id="guestName" type="text" placeholder="Guest Name"
+                    class="bg-transparent text-white w-full mb-2 outline-none">
+                <div class="flex gap-2">
+                    <input id="guestRelation" type="text" placeholder="Relation"
+                        class="bg-transparent text-slate-400 text-sm w-full outline-none">
+                    <button onclick="addGuest()" class="text-yellow-500 font-bold text-xs uppercase">ADD</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Safety -->
+        <div id="step-3" class="step-content hidden">
+            <h2 class="text-2xl font-serif text-white mb-6">Safety First</h2>
+            <div class="space-y-4">
+                <input id="emergencyName" type="text" placeholder="Emergency Contact Name"
+                    class="w-full bg-slate-900/50 border border-slate-700 p-4 rounded-xl text-white outline-none focus:border-yellow-500 transition-colors">
+                <input id="emergencyPhone" type="tel" placeholder="Emergency Phone"
+                    class="w-full bg-slate-900/50 border border-slate-700 p-4 rounded-xl text-white outline-none focus:border-yellow-500 transition-colors">
+            </div>
+        </div>
+
+        <!-- Step 4: The Pact -->
+        <div id="step-4" class="step-content hidden">
+            <h2 class="text-2xl font-serif text-white mb-6">The Pact</h2>
+            <div
+                class="bg-slate-900/50 p-4 rounded-xl mb-6 text-xs text-slate-400 space-y-2 h-32 overflow-y-auto border border-slate-700">
+                <p>• I agree to follow campsite rules and respect guests & wildlife.</p>
+                <p>• Open fires purely in designated areas.</p>
+                <p>• Damages to property will incur charges.</p>
+                <p>• Zero tolerance for littering.</p>
+                <p>• Quiet hours after 10 PM.</p>
+            </div>
+            <div class="mb-6">
+                <p class="text-slate-500 text-xs uppercase tracking-wider mb-2">Draw Signature</p>
+                <canvas id="signatureCanvas" width="300" height="150"
+                    class="border border-slate-700 bg-slate-900 rounded-xl w-full"></canvas>
+                <p class="text-[10px] text-slate-600 mt-2 italic text-center">By signing, you accept all T&C</p>
+            </div>
+        </div>
+
+        <!-- Success -->
+        <div id="step-5" class="step-content hidden text-center py-8">
+            <div class="text-green-400 text-6xl mb-4">✅</div>
+            <h3 class="text-2xl font-serif text-white mb-2">You're All Set!</h3>
+            <p class="text-sm text-slate-400 mb-6">Registration complete. Your Adventure Pass is active.</p>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl w-full max-w-sm mx-auto">
+                <p class="text-xs text-slate-500 uppercase tracking-widest mb-4">SHOW AT RECEPTION</p>
+                <div class="w-48 h-48 bg-white mx-auto rounded-lg mb-4 flex items-center justify-center">
+                    <div class="grid grid-cols-5 gap-1 opacity-80" id="qrCode"></div>
+                </div>
+                <p class="text-yellow-500 font-mono text-lg tracking-widest uppercase" id="bookingCode">ADVENTURE</p>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div id="navigation" class="hidden mt-8 flex gap-4">
+            <button onclick="prevStep()"
+                class="px-6 py-4 rounded-xl bg-slate-900 text-slate-400 font-bold uppercase tracking-widest text-xs border border-slate-800">Back</button>
+            <button id="nextBtn" onclick="nextStep()"
+                class="flex-1 py-4 bg-white text-black font-bold uppercase tracking-widest rounded-xl hover:bg-slate-200 transition-colors text-xs shadow-lg shadow-white/10">Next
+                Step</button>
+        </div>
+    </div>
+
+    <!-- Firebase & Logic -->
     <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
-        import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // Firebase Configuration (Already configured from existing file)
         const firebaseConfig = {
             apiKey: "AIzaSyCrW-ZPADSqM7spfNo7LRiorAjLXxTnaOQ",
             authDomain: "paradiso-manager.firebaseapp.com",
@@ -65,352 +228,144 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Make db available globally
-        window.firestoreDB = db;
-        window.firestoreAddDoc = addDoc;
-        window.firestoreCollection = collection;
-    </script>
+        // State
+        let currentStep = 0;
+        let fellowGuests = [];
+        let signatureData = '';
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookingId = urlParams.get('id');
 
-    <style>
-        body {
-            overscroll-behavior: none;
+        // Signature Canvas
+        const canvas = document.getElementById('signatureCanvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); startDrawing(e.touches[0]); });
+        canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e.touches[0]); });
+        canvas.addEventListener('touchend', stopDrawing);
+
+        function startDrawing(e) {
+            isDrawing = true;
+            ctx.strokeStyle = '#EAB308';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            const rect = canvas.getBoundingClientRect();
+            ctx.beginPath();
+            ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
         }
 
-        .btn-press:active {
-            transform: scale(0.98);
+        function draw(e) {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+            ctx.stroke();
         }
-    </style>
-</head>
 
-<body class="bg-[#050505] text-[#e5e5e5] overscroll-none">
-    <div id="root"></div>
+        function stopDrawing() {
+            isDrawing = false;
+            signatureData = canvas.toDataURL();
+        }
 
-    <script type="module">
-        import React, { useState, useRef } from 'https://esm.sh/react@18.2.0';
-        import ReactDOM from 'https://esm.sh/react-dom@18.2.0/client';
-        import { motion, AnimatePresence } from 'https://esm.sh/framer-motion@10.16.4';
-
-        // Simple Signature Pad Component
-        const SimpleSignaturePad = ({ onEnd }) => {
-            const canvasRef = useRef(null);
-            const [isDrawing, setIsDrawing] = useState(false);
-
-            const startDrawing = (e) => {
-                const canvas = canvasRef.current;
-                if (!canvas) return;
-                const ctx = canvas.getContext('2d');
-                if (!ctx) return;
-
-                ctx.strokeStyle = '#EAB308';
-                ctx.lineWidth = 2;
-                ctx.lineCap = 'round';
-
-                const rect = canvas.getBoundingClientRect();
-                const x = (e.clientX || e.touches[0].clientX) - rect.left;
-                const y = (e.clientY || e.touches[0].clientY) - rect.top;
-
-                ctx.beginPath();
-                ctx.moveTo(x, y);
-                setIsDrawing(true);
-            };
-
-            const draw = (e) => {
-                if (!isDrawing) return;
-                const canvas = canvasRef.current;
-                if (!canvas) return;
-                const ctx = canvas.getContext('2d');
-                if (!ctx) return;
-
-                const rect = canvas.getBoundingClientRect();
-                const x = (e.clientX || e.touches[0].clientX) - rect.left;
-                const y = (e.clientY || e.touches[0].clientY) - rect.top;
-
-                ctx.lineTo(x, y);
-                ctx.stroke();
-            };
-
-            const endDrawing = () => {
-                setIsDrawing(false);
-                if (canvasRef.current) {
-                    onEnd(canvasRef.current.toDataURL());
-                }
-            };
-
-            return React.createElement('canvas', {
-                ref: canvasRef,
-                width: 300,
-                height: 150,
-                className: "border border-zinc-700 bg-zinc-900 rounded-xl touch-none w-full",
-                onMouseDown: startDrawing,
-                onMouseMove: draw,
-                onMouseUp: endDrawing,
-                onMouseLeave: endDrawing,
-                onTouchStart: startDrawing,
-                onTouchMove: draw,
-                onTouchEnd: endDrawing
-            });
+        // Navigation
+        window.nextStep = function () {
+            if (currentStep === 4) {
+                submitForm();
+                return;
+            }
+            currentStep++;
+            updateUI();
         };
 
-        // Main Registration Component
-        const GuestRegistration = () => {
-            const [step, setStep] = useState(0);
-            const [loading, setLoading] = useState(false);
-            const [formData, setFormData] = useState({
-                fullName: '',
-                email: '',
-                address: '',
-                idProofNumber: '',
-                emergencyName: '',
-                emergencyPhone: '',
-                termsAgreed: false,
-                signature: ''
-            });
-            const [fellowGuests, setFellowGuests] = useState([]);
+        window.prevStep = function () {
+            currentStep--;
+            updateUI();
+        };
 
-            // Get booking ID from URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const bookingId = urlParams.get('id');
+        window.addGuest = function () {
+            const name = document.getElementById('guestName').value;
+            const relation = document.getElementById('guestRelation').value;
+            if (name) {
+                fellowGuests.push({ name, relation });
+                updateGuestList();
+                document.getElementById('guestName').value = '';
+                document.getElementById('guestRelation').value = '';
+            }
+        };
 
-            const handleNext = () => setStep(p => p + 1);
-            const handleBack = () => setStep(p => p - 1);
+        function updateGuestList() {
+            const list = document.getElementById('guestList');
+            list.innerHTML = fellowGuests.map(g =>
+                `<div class="bg-slate-800 p-3 rounded-lg flex justify-between items-center">
+                    <span class="text-white">${g.name}</span>
+                    <span class="text-slate-500 text-xs">${g.relation}</span>
+                </div>`
+            ).join('');
+        }
 
-            const handleSubmit = async () => {
-                if (!bookingId) {
-                    alert('Invalid booking ID');
-                    return;
-                }
-                setLoading(true);
+        function updateUI() {
+            // Hide all steps
+            for (let i = 0; i <= 5; i++) {
+                document.getElementById(`step-${i}`).classList.add('hidden');
+            }
+            // Show current step
+            document.getElementById(`step-${currentStep}`).classList.remove('hidden');
 
-                try {
-                    await window.firestoreAddDoc(window.firestoreCollection(window.firestoreDB, 'registrations'), {
-                        bookingId,
-                        fullName: formData.fullName,
-                        email: formData.email,
-                        address: formData.address,
-                        idProofNumber: formData.idProofNumber,
-                        fellowGuests,
-                        emergencyContactName: formData.emergencyName,
-                        emergencyContactPhone: formData.emergencyPhone,
-                        emergencyRelation: formData.emergencyRelation || '',
-                        termsAgreed: formData.termsAgreed,
-                        signatureUrl: formData.signature,
-                        submittedAt: Date.now()
-                    });
-                    setStep(5); // Success
-                } catch (error) {
-                    console.error('Registration error:', error);
-                    alert('Failed to submit registration. Please try again.');
-                } finally {
-                    setLoading(false);
-                }
-            };
+            // Update progress
+            document.getElementById('progress').style.width = `${(currentStep / 4) * 100}%`;
 
-            // Success Screen
-            if (step === 5) {
-                return React.createElement('div', { className: "min-h-screen bg-black flex flex-col items-center justify-center p-6 text-center" },
-                    React.createElement(motion.div, {
-                        initial: { scale: 0.8, opacity: 0 },
-                        animate: { scale: 1, opacity: 1 },
-                        className: "w-24 h-24 bg-gold-500 rounded-full flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(234,179,8,0.4)]"
-                    },
-                        React.createElement('svg', { className: "w-12 h-12 text-black", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor" },
-                            React.createElement('path', { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M5 13l4 4L19 7" })
-                        )
-                    ),
-                    React.createElement('h1', { className: "text-3xl font-serif text-white mb-2" }, "You're All Set!"),
-                    React.createElement('p', { className: "text-zinc-400 mb-8 max-w-xs mx-auto" }, "Registration complete. Your Adventure Pass is active."),
-                    React.createElement('div', { className: "bg-zinc-900 border border-zinc-800 p-6 rounded-2xl w-full max-w-sm" },
-                        React.createElement('p', { className: "text-xs text-zinc-500 uppercase tracking-widest mb-4" }, "SHOW AT RECEPTION"),
-                        React.createElement('div', { className: "w-48 h-48 bg-white mx-auto rounded-lg mb-4 flex items-center justify-center" },
-                            React.createElement('div', { className: "grid grid-cols-5 gap-1 opacity-80" },
-                                [...Array(25)].map((_, i) =>
-                                    React.createElement('div', { key: i, className: `w-6 h-6 ${Math.random() > 0.5 ? 'bg-black' : 'bg-transparent'}` })
-                                )
-                            )
-                        ),
-                        React.createElement('p', { className: "text-gold-500 font-mono text-lg tracking-widest uppercase" },
-                            bookingId?.substring(0, 6) || "ADVENTURE"
-                        )
-                    )
-                );
+            // Show/hide navigation
+            const nav = document.getElementById('navigation');
+            if (currentStep === 0 || currentStep === 5) {
+                nav.classList.add('hidden');
+            } else {
+                nav.classList.remove('hidden');
+                document.getElementById('nextBtn').textContent = currentStep === 4 ? 'Seal the Pact' : 'Next Step';
+            }
+        }
+
+        async function submitForm() {
+            if (!bookingId) {
+                alert('Invalid booking ID');
+                return;
             }
 
-            // Main Form
-            return React.createElement('div', { className: "min-h-screen bg-[#050505] flex flex-col relative overflow-hidden" },
-                // Progress Bar
-                React.createElement('div', { className: "h-1 bg-zinc-900 w-full fixed top-0 z-50" },
-                    React.createElement(motion.div, {
-                        className: "h-full bg-gold-500",
-                        initial: { width: 0 },
-                        animate: { width: `${(step / 4) * 100}%` }
-                    })
-                ),
+            try {
+                await addDoc(collection(db, 'registrations'), {
+                    bookingId,
+                    fullName: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    address: document.getElementById('address').value,
+                    idProofNumber: document.getElementById('idNumber').value,
+                    fellowGuests,
+                    emergencyContactName: document.getElementById('emergencyName').value,
+                    emergencyContactPhone: document.getElementById('emergencyPhone').value,
+                    termsAgreed: true,
+                    signatureUrl: signatureData,
+                    submittedAt: Date.now()
+                });
 
-                React.createElement('div', { className: "flex-1 flex flex-col p-6 max-w-md mx-auto w-full z-10 pt-12" },
-                    // Step 0: Intro
-                    step === 0 && React.createElement(motion.div, {
-                        initial: { y: 20, opacity: 0 },
-                        animate: { y: 0, opacity: 1 },
-                        className: "flex-1 flex flex-col justify-center"
-                    },
-                        React.createElement('span', { className: "text-gold-500 text-xs font-bold uppercase tracking-[0.3em] mb-4" }, "GYPSYS PARADISO"),
-                        React.createElement('h1', { className: "text-4xl font-serif text-white mb-6 leading-tight" },
-                            "Unlock Your ",
-                            React.createElement('br'),
-                            React.createElement('span', { className: "text-zinc-500" }, "Adventure.")
-                        ),
-                        React.createElement('p', { className: "text-zinc-400 text-lg mb-12" },
-                            "Welcome. Let's get you checked in so you can head straight to the campfire."
-                        ),
-                        React.createElement('button', {
-                            onClick: handleNext,
-                            className: "w-full py-4 bg-white text-black font-bold uppercase tracking-widest rounded-xl hover:bg-zinc-200 transition-colors"
-                        }, "Start Check-In")
-                    ),
+                // Generate QR
+                const qr = document.getElementById('qrCode');
+                for (let i = 0; i < 25; i++) {
+                    const div = document.createElement('div');
+                    div.className = `w-6 h-6 ${Math.random() > 0.5 ? 'bg-black' : 'bg-transparent'}`;
+                    qr.appendChild(div);
+                }
+                document.getElementById('bookingCode').textContent = bookingId.substring(0, 6);
 
-                    // Step 1: Primary Guest
-                    step === 1 && React.createElement(motion.div, {
-                        initial: { x: 20, opacity: 0 },
-                        animate: { x: 0, opacity: 1 },
-                        className: "flex-1"
-                    },
-                        React.createElement('h2', { className: "text-2xl font-serif text-white mb-6" }, "About You"),
-                        React.createElement('div', { className: "space-y-4" },
-                            React.createElement('input', {
-                                value: formData.fullName,
-                                onChange: e => setFormData({ ...formData, fullName: e.target.value }),
-                                placeholder: "Full Name",
-                                className: "w-full bg-zinc-900/50 border border-zinc-700 p-4 rounded-xl text-white outline-none focus:border-gold-500 transition-colors"
-                            }),
-                            React.createElement('input', {
-                                value: formData.address,
-                                onChange: e => setFormData({ ...formData, address: e.target.value }),
-                                placeholder: "City / Address",
-                                className: "w-full bg-zinc-900/50 border border-zinc-700 p-4 rounded-xl text-white outline-none focus:border-gold-500 transition-colors"
-                            }),
-                            React.createElement('input', {
-                                value: formData.email,
-                                onChange: e => setFormData({ ...formData, email: e.target.value }),
-                                placeholder: "Email Address",
-                                type: "email",
-                                className: "w-full bg-zinc-900/50 border border-zinc-700 p-4 rounded-xl text-white outline-none focus:border-gold-500 transition-colors"
-                            }),
-                            React.createElement('input', {
-                                value: formData.idProofNumber,
-                                onChange: e => setFormData({ ...formData, idProofNumber: e.target.value }),
-                                placeholder: "Aadhaar / ID Number",
-                                className: "w-full bg-zinc-900/50 border border-zinc-700 p-4 rounded-xl text-white outline-none focus:border-gold-500 transition-colors"
-                            })
-                        )
-                    ),
+                currentStep = 5;
+                updateUI();
+            } catch (error) {
+                console.error('Registration error:', error);
+                alert('Failed to submit. Please try again.');
+            }
+        }
 
-                    // Step 2: The Wolfpack
-                    step === 2 && React.createElement(motion.div, {
-                        initial: { x: 20, opacity: 0 },
-                        animate: { x: 0, opacity: 1 },
-                        className: "flex-1"
-                    },
-                        React.createElement('h2', { className: "text-2xl font-serif text-white mb-2" }, "The Wolfpack"),
-                        React.createElement('p', { className: "text-zinc-500 text-sm mb-6" }, "Who else is joining the adventure?"),
-                        React.createElement('div', { className: "space-y-3 mb-6" },
-                            fellowGuests.map((g, i) =>
-                                React.createElement('div', { key: i, className: "bg-zinc-800 p-3 rounded-lg flex justify-between items-center" },
-                                    React.createElement('span', { className: "text-white" }, g.name),
-                                    React.createElement('span', { className: "text-zinc-500 text-xs" }, g.relation)
-                                )
-                            ),
-                            React.createElement('div', { className: "p-4 border border-dashed border-zinc-700 rounded-xl" },
-                                React.createElement('input', { id: "newGuestName", placeholder: "Guest Name", className: "bg-transparent text-white w-full mb-2 outline-none" }),
-                                React.createElement('div', { className: "flex gap-2" },
-                                    React.createElement('input', { id: "newGuestRel", placeholder: "Relation", className: "bg-transparent text-zinc-400 text-sm w-full outline-none" }),
-                                    React.createElement('button', {
-                                        onClick: () => {
-                                            const name = document.getElementById('newGuestName').value;
-                                            const rel = document.getElementById('newGuestRel').value;
-                                            if (name) {
-                                                setFellowGuests([...fellowGuests, { name, relation: rel, age: '' }]);
-                                                document.getElementById('newGuestName').value = '';
-                                                document.getElementById('newGuestRel').value = '';
-                                            }
-                                        },
-                                        className: "text-gold-500 font-bold text-xs uppercase"
-                                    }, "ADD")
-                                )
-                            )
-                        )
-                    ),
-
-                    // Step 3: Safety
-                    step === 3 && React.createElement(motion.div, {
-                        initial: { x: 20, opacity: 0 },
-                        animate: { x: 0, opacity: 1 },
-                        className: "flex-1"
-                    },
-                        React.createElement('h2', { className: "text-2xl font-serif text-white mb-6" }, "Safety First"),
-                        React.createElement('div', { className: "space-y-4" },
-                            React.createElement('input', {
-                                value: formData.emergencyName,
-                                onChange: e => setFormData({ ...formData, emergencyName: e.target.value }),
-                                placeholder: "Emergency Contact Name",
-                                className: "w-full bg-zinc-900/50 border border-zinc-700 p-4 rounded-xl text-white outline-none focus:border-gold-500 transition-colors"
-                            }),
-                            React.createElement('input', {
-                                value: formData.emergencyPhone,
-                                onChange: e => setFormData({ ...formData, emergencyPhone: e.target.value }),
-                                placeholder: "Emergency Phone",
-                                type: "tel",
-                                className: "w-full bg-zinc-900/50 border border-zinc-700 p-4 rounded-xl text-white outline-none focus:border-gold-500 transition-colors"
-                            })
-                        )
-                    ),
-
-                    // Step 4: Terms & Sign
-                    step === 4 && React.createElement(motion.div, {
-                        initial: { x: 20, opacity: 0 },
-                        animate: { x: 0, opacity: 1 },
-                        className: "flex-1"
-                    },
-                        React.createElement('h2', { className: "text-2xl font-serif text-white mb-6" }, "The Pact"),
-                        React.createElement('div', { className: "bg-zinc-900/50 p-4 rounded-xl mb-6 text-xs text-zinc-400 space-y-2 h-32 overflow-y-auto border border-zinc-700" },
-                            React.createElement('p', null, "• I agree to follow campsite rules and respect guests & wildlife."),
-                            React.createElement('p', null, "• Open fires purely in designated areas."),
-                            React.createElement('p', null, "• Damages to property will incur charges."),
-                            React.createElement('p', null, "• Zero tolerance for littering."),
-                            React.createElement('p', null, "• Quiet hours after 10 PM.")
-                        ),
-                        React.createElement('div', { className: "mb-6" },
-                            React.createElement('p', { className: "text-zinc-500 text-xs uppercase tracking-wider mb-2" }, "Draw Signature"),
-                            React.createElement(SimpleSignaturePad, { onEnd: (url) => setFormData({ ...formData, signature: url, termsAgreed: true }) }),
-                            React.createElement('p', { className: "text-[10px] text-zinc-600 mt-2 italic text-center" }, "By signing, you accept all T&C")
-                        )
-                    ),
-
-                    // Navigation Buttons
-                    step > 0 && React.createElement('div', { className: "fixed bottom-0 left-0 right-0 p-4 bg-black/80 backdrop-blur-md border-t border-white/5 z-50 flex gap-4" },
-                        React.createElement('button', {
-                            onClick: handleBack,
-                            className: "px-6 py-4 rounded-xl bg-zinc-900 text-zinc-400 font-bold uppercase tracking-widest text-xs border border-zinc-800"
-                        }, "Back"),
-                        step < 4
-                            ? React.createElement('button', {
-                                onClick: handleNext,
-                                className: "flex-1 py-4 bg-white text-black font-bold uppercase tracking-widest rounded-xl hover:bg-zinc-200 transition-colors text-xs shadow-lg shadow-white/10"
-                            }, "Next Step")
-                            : React.createElement('button', {
-                                onClick: handleSubmit,
-                                disabled: !formData.termsAgreed || loading,
-                                className: `flex-1 py-4 font-bold uppercase tracking-widest rounded-xl transition-colors text-xs shadow-lg ${formData.termsAgreed ? 'bg-gold-500 text-black shadow-gold-500/20' : 'bg-zinc-800 text-zinc-500'}`
-                            }, loading ? 'Sealing...' : 'Seal the Pact')
-                    ),
-
-                    step > 0 && React.createElement('div', { className: "h-24" })
-                )
-            );
-        };
-
-        // Render the app
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(React.createElement(GuestRegistration));
+        // Initialize
+        updateUI();
     </script>
 </body>
 
