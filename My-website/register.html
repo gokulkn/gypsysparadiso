@@ -214,7 +214,7 @@
     <!-- Firebase & Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, doc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCrW-ZPADSqM7spfNo7LRiorAjLXxTnaOQ",
@@ -333,7 +333,9 @@
             }
 
             try {
-                await addDoc(collection(db, 'registrations'), {
+                // Save registration using booking ID as document ID
+                const registrationRef = doc(db, 'registrations', bookingId);
+                await setDoc(registrationRef, {
                     bookingId,
                     fullName: document.getElementById('fullName').value,
                     email: document.getElementById('email').value,
@@ -345,6 +347,12 @@
                     termsAgreed: true,
                     signatureUrl: signatureData,
                     submittedAt: Date.now()
+                });
+
+                // Update booking status to show "REG DONE" badge
+                const bookingRef = doc(db, 'bookings', bookingId);
+                await updateDoc(bookingRef, {
+                    registrationStatus: 'completed'
                 });
 
                 // Generate QR
