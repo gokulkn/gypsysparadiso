@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Registration | Gypsys Paradiso</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        paradiso: {
+                            bg: '#0F172A',
+                            gold: '#D4AF37',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background-color: #0F172A;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(212, 175, 55, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass-card {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+
+        .step-content {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #D4AF37;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        canvas {
+            touch-action: none;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-md glass-card rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden"
+        id="app-container">
+        <!-- Progress Bar -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-gray-800">
+            <div id="progress" class="progress-bar h-full bg-gradient-to-r from-yellow-600 to-yellow-500"
+                style="width: 0%"></div>
+        </div>
+
+        <!-- Header -->
+        <div class="text-center mb-8 mt-4">
+            <div
+                class="inline-flex items-center justify-center w-12 h-12 rounded-full border border-yellow-500/30 bg-yellow-500/10 mb-3 text-2xl">
+                ⛺
+            </div>
+            <h1 class="font-serif text-3xl text-white mb-1">Guest Registration</h1>
+            <p class="text-xs text-slate-400 uppercase tracking-widest">Gypsys Paradiso</p>
+        </div>
+
+        <!-- Step 0: Intro -->
+        <div id="step-0" class="step-content">
+            <div class="text-center py-8">
+                <span class="text-yellow-500 text-xs font-bold uppercase tracking-[0.3em] mb-4 block">GYPSYS
+                    PARADISO</span>
+                <h2 class="text-4xl font-serif text-white mb-6 leading-tight">Unlock Your <br><span
+                        class="text-slate-500">Adventure.</span></h2>
+                <p class="text-slate-400 text-lg mb-12">Welcome. Let's get you checked in so you can head straight to
+                    the campfire.</p>
+                <button onclick="nextStep()"
+                    class="w-full py-4 bg-white text-black font-bold uppercase tracking-widest rounded-xl hover:bg-slate-200 transition-colors">
+                    Start Check-In
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 1: About You -->
+        <div id="step-1" class="step-content hidden">
+            <h2 class="text-2xl font-serif text-white mb-6">About You</h2>
+            <div class="space-y-4">
+                <input id="fullName" type="text" placeholder="Full Name"
+                    class="w-full bg-slate-900/50 border border-slate-700 p-4 rounded-xl text-white outline-none focus:border-yellow-500 transition-colors">
+                <input id="address" type="text" placeholder="City / Address"
+                    class="w-full bg-slate-900/50 border border-slate-700 p-4 rounded-xl text-white outline-none focus:border-yellow-500 transition-colors">
+                <input id="email" type="email" placeholder="Email Address"
+                    class="w-full bg-slate-900/50 border border-slate-700 p-4 rounded-xl text-white outline-none focus:border-yellow-500 transition-colors">
+                <input id="idNumber" type="text" placeholder="Aadhaar / ID Number"
+                    class="w-full bg-slate-900/50 border border-slate-700 p-4 rounded-xl text-white outline-none focus:border-yellow-500 transition-colors">
+            </div>
+        </div>
+
+        <!-- Step 2: The Wolfpack -->
+        <div id="step-2" class="step-content hidden">
+            <h2 class="text-2xl font-serif text-white mb-2">The Wolfpack</h2>
+            <p class="text-slate-500 text-sm mb-6">Who else is joining the adventure?</p>
+            <div id="guestList" class="space-y-3 mb-6"></div>
+            <div class="p-4 border border-dashed border-slate-700 rounded-xl">
+                <input id="guestName" type="text" placeholder="Guest Name"
+                    class="bg-transparent text-white w-full mb-2 outline-none">
+                <div class="flex gap-2">
+                    <input id="guestRelation" type="text" placeholder="Relation"
+                        class="bg-transparent text-slate-400 text-sm w-full outline-none">
+                    <button onclick="addGuest()" class="text-yellow-500 font-bold text-xs uppercase">ADD</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Safety -->
+        <div id="step-3" class="step-content hidden">
+            <h2 class="text-2xl font-serif text-white mb-6">Safety First</h2>
+            <div class="space-y-4">
+                <input id="emergencyName" type="text" placeholder="Emergency Contact Name"
+                    class="w-full bg-slate-900/50 border border-slate-700 p-4 rounded-xl text-white outline-none focus:border-yellow-500 transition-colors">
+                <input id="emergencyPhone" type="tel" placeholder="Emergency Phone"
+                    class="w-full bg-slate-900/50 border border-slate-700 p-4 rounded-xl text-white outline-none focus:border-yellow-500 transition-colors">
+            </div>
+        </div>
+
+        <!-- Step 4: The Pact -->
+        <div id="step-4" class="step-content hidden">
+            <h2 class="text-2xl font-serif text-white mb-6">The Pact</h2>
+            <div
+                class="bg-slate-900/50 p-4 rounded-xl mb-6 text-xs text-slate-400 space-y-2 h-32 overflow-y-auto border border-slate-700">
+                <p>• I agree to follow campsite rules and respect guests & wildlife.</p>
+                <p>• Open fires purely in designated areas.</p>
+                <p>• Damages to property will incur charges.</p>
+                <p>• Zero tolerance for littering.</p>
+                <p>• Quiet hours after 10 PM.</p>
+            </div>
+            <div class="mb-6">
+                <p class="text-slate-500 text-xs uppercase tracking-wider mb-2">Draw Signature</p>
+                <canvas id="signatureCanvas" width="300" height="150"
+                    class="border border-slate-700 bg-slate-900 rounded-xl w-full"></canvas>
+                <p class="text-[10px] text-slate-600 mt-2 italic text-center">By signing, you accept all T&C</p>
+            </div>
+        </div>
+
+        <!-- Success -->
+        <div id="step-5" class="step-content hidden text-center py-8">
+            <div class="text-green-400 text-6xl mb-4">✅</div>
+            <h3 class="text-2xl font-serif text-white mb-2">You're All Set!</h3>
+            <p class="text-sm text-slate-400 mb-6">Registration complete. Your Adventure Pass is active.</p>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl w-full max-w-sm mx-auto">
+                <p class="text-xs text-slate-500 uppercase tracking-widest mb-4">SHOW AT RECEPTION</p>
+                <div class="w-48 h-48 bg-white mx-auto rounded-lg mb-4 flex items-center justify-center">
+                    <div class="grid grid-cols-5 gap-1 opacity-80" id="qrCode"></div>
+                </div>
+                <p class="text-yellow-500 font-mono text-lg tracking-widest uppercase" id="bookingCode">ADVENTURE</p>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div id="navigation" class="hidden mt-8 flex gap-4">
+            <button onclick="prevStep()"
+                class="px-6 py-4 rounded-xl bg-slate-900 text-slate-400 font-bold uppercase tracking-widest text-xs border border-slate-800">Back</button>
+            <button id="nextBtn" onclick="nextStep()"
+                class="flex-1 py-4 bg-white text-black font-bold uppercase tracking-widest rounded-xl hover:bg-slate-200 transition-colors text-xs shadow-lg shadow-white/10">Next
+                Step</button>
+        </div>
+    </div>
+
+    <!-- Firebase & Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, doc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCrW-ZPADSqM7spfNo7LRiorAjLXxTnaOQ",
+            authDomain: "paradiso-manager.firebaseapp.com",
+            projectId: "paradiso-manager",
+            storageBucket: "paradiso-manager.firebasestorage.app",
+            messagingSenderId: "732773359834",
+            appId: "1:732773359834:web:08d308d3bedee616b305e3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // State
+        let currentStep = 0;
+        let fellowGuests = [];
+        let signatureData = '';
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookingId = urlParams.get('id');
+
+        // Signature Canvas
+        const canvas = document.getElementById('signatureCanvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); startDrawing(e.touches[0]); });
+        canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e.touches[0]); });
+        canvas.addEventListener('touchend', stopDrawing);
+
+        function startDrawing(e) {
+            isDrawing = true;
+            ctx.strokeStyle = '#EAB308';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            const rect = canvas.getBoundingClientRect();
+            ctx.beginPath();
+            ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+            ctx.stroke();
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+            signatureData = canvas.toDataURL();
+        }
+
+        // Navigation
+        window.nextStep = function () {
+            if (currentStep === 4) {
+                submitForm();
+                return;
+            }
+            currentStep++;
+            updateUI();
+        };
+
+        window.prevStep = function () {
+            currentStep--;
+            updateUI();
+        };
+
+        window.addGuest = function () {
+            const name = document.getElementById('guestName').value;
+            const relation = document.getElementById('guestRelation').value;
+            if (name) {
+                fellowGuests.push({ name, relation });
+                updateGuestList();
+                document.getElementById('guestName').value = '';
+                document.getElementById('guestRelation').value = '';
+            }
+        };
+
+        function updateGuestList() {
+            const list = document.getElementById('guestList');
+            list.innerHTML = fellowGuests.map(g =>
+                `<div class="bg-slate-800 p-3 rounded-lg flex justify-between items-center">
+                    <span class="text-white">${g.name}</span>
+                    <span class="text-slate-500 text-xs">${g.relation}</span>
+                </div>`
+            ).join('');
+        }
+
+        function updateUI() {
+            // Hide all steps
+            for (let i = 0; i <= 5; i++) {
+                document.getElementById(`step-${i}`).classList.add('hidden');
+            }
+            // Show current step
+            document.getElementById(`step-${currentStep}`).classList.remove('hidden');
+
+            // Update progress
+            document.getElementById('progress').style.width = `${(currentStep / 4) * 100}%`;
+
+            // Show/hide navigation
+            const nav = document.getElementById('navigation');
+            if (currentStep === 0 || currentStep === 5) {
+                nav.classList.add('hidden');
+            } else {
+                nav.classList.remove('hidden');
+                document.getElementById('nextBtn').textContent = currentStep === 4 ? 'Seal the Pact' : 'Next Step';
+            }
+        }
+
+        async function submitForm() {
+            if (!bookingId) {
+                alert('Invalid booking ID');
+                return;
+            }
+
+            try {
+                // Save registration using booking ID as document ID
+                const registrationRef = doc(db, 'registrations', bookingId);
+                await setDoc(registrationRef, {
+                    bookingId,
+                    fullName: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    address: document.getElementById('address').value,
+                    idProofNumber: document.getElementById('idNumber').value,
+                    fellowGuests,
+                    emergencyContactName: document.getElementById('emergencyName').value,
+                    emergencyContactPhone: document.getElementById('emergencyPhone').value,
+                    termsAgreed: true,
+                    signatureUrl: signatureData,
+                    submittedAt: Date.now()
+                });
+
+                // Update booking status to show "REG DONE" badge
+                const bookingRef = doc(db, 'bookings', bookingId);
+                await updateDoc(bookingRef, {
+                    registrationStatus: 'completed'
+                });
+
+                // Generate QR
+                const qr = document.getElementById('qrCode');
+                for (let i = 0; i < 25; i++) {
+                    const div = document.createElement('div');
+                    div.className = `w-6 h-6 ${Math.random() > 0.5 ? 'bg-black' : 'bg-transparent'}`;
+                    qr.appendChild(div);
+                }
+                document.getElementById('bookingCode').textContent = bookingId.substring(0, 6);
+
+                currentStep = 5;
+                updateUI();
+            } catch (error) {
+                console.error('Registration error:', error);
+                alert('Failed to submit. Please try again.');
+            }
+        }
+
+        // Initialize
+        updateUI();
+    </script>
+</body>
+
+</html>
