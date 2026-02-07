@@ -83,3 +83,6 @@ public
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# Security
+config.js
